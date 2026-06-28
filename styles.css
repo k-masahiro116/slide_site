@@ -259,7 +259,7 @@ body {
   display: none;
   width: min(100%, 1040px);
   min-height: min(68vh, 680px);
-  padding: clamp(32px, 7vw, 80px);
+  padding: clamp(16px, 3vw, 40px);
   border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--panel);
@@ -269,7 +269,7 @@ body {
 .slide.is-active {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   animation: fade-in 180ms ease-out;
 }
 
@@ -481,4 +481,3 @@ pre code {
     bottom: 18px;
   }
 }
-

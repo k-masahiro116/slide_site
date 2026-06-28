@@ -18,14 +18,21 @@ function render() {
     slide.setAttribute("aria-hidden", String(index !== activeIndex));
   });
 
-  document.querySelectorAll(".toc-section").forEach((section, index) => {
-    const isActive = index === activeIndex;
-    const link = section.querySelector(".toc-link");
+  // TOC: グループ単位で大項目をハイライト、小項目ボタンをアクティブ化
+  document.querySelectorAll(".toc-section").forEach((section) => {
+    const links = Array.from(section.querySelectorAll(".toc-link"));
+    const isGroupActive = links.some(
+      (btn) => Number(btn.dataset.slideIndex) === activeIndex
+    );
 
-    section.open = isActive;
-    section.classList.toggle("is-active", isActive);
-    link.classList.toggle("is-active", isActive);
-    link.setAttribute("aria-current", isActive ? "step" : "false");
+    section.open = isGroupActive;
+    section.classList.toggle("is-active", isGroupActive);
+
+    links.forEach((btn) => {
+      const isActive = Number(btn.dataset.slideIndex) === activeIndex;
+      btn.classList.toggle("is-active", isActive);
+      btn.setAttribute("aria-current", isActive ? "step" : "false");
+    });
   });
 
   currentSlide.textContent = String(activeIndex + 1);
@@ -61,18 +68,11 @@ function handleKeydown(event) {
   action();
 }
 
-function getSlideTitle(slide, index) {
+function getSlideLabel(slide, index) {
   return (
-    slide.querySelector("h1, h2")?.textContent?.trim() ||
-    slide.dataset.title ||
-    "Slide " + (index + 1)
-  );
-}
-
-function getSlideSubtitle(slide, index) {
-  return (
-    slide.querySelector(".eyebrow")?.textContent?.trim() ||
-    slide.dataset.title ||
+    // slide.querySelector(".eyebrow")?.textContent?.trim() ||
+    slide.querySelector(".title")?.textContent?.trim() ||
+    // slide.dataset.title ||
     "Slide " + (index + 1)
   );
 }
@@ -80,22 +80,46 @@ function getSlideSubtitle(slide, index) {
 function buildTableOfContents() {
   tocList.innerHTML = "";
 
+  // data-group でスライドをグループ化（順序を保持）
+  const groups = [];
+  const groupMap = new Map();
+
   slides.forEach((slide, index) => {
+    const groupName =
+      slide.dataset.group ||
+      slide.querySelector("h1, h2")?.textContent?.trim() ||
+      slide.dataset.title ||
+      "Slide " + (index + 1);
+
+    if (!groupMap.has(groupName)) {
+      const group = { name: groupName, slides: [] };
+      groups.push(group);
+      groupMap.set(groupName, group);
+    }
+    groupMap.get(groupName).slides.push({ slide, index });
+  });
+
+  groups.forEach(({ name, slides: groupSlides }) => {
     const item = document.createElement("li");
     const section = document.createElement("details");
     const summary = document.createElement("summary");
-    const button = document.createElement("button");
 
     section.className = "toc-section";
     summary.className = "toc-summary";
-    summary.textContent = getSlideTitle(slide, index);
+    summary.textContent = name;
 
-    button.className = "toc-link";
-    button.type = "button";
-    button.textContent = getSlideSubtitle(slide, index);
-    button.addEventListener("click", () => goToSlide(index));
+    section.append(summary);
 
-    section.append(summary, button);
+    groupSlides.forEach(({ slide, index }) => {
+      const button = document.createElement("button");
+      button.className = "toc-link";
+      button.type = "button";
+      button.dataset.slideIndex = index;
+      button.textContent = getSlideLabel(slide, index);
+      button.addEventListener("click", () => goToSlide(index));
+      section.append(button);
+    });
+
     item.append(section);
     tocList.append(item);
   });
@@ -107,4 +131,3 @@ document.addEventListener("keydown", handleKeydown);
 
 buildTableOfContents();
 render();
-

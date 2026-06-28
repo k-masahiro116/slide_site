@@ -16,15 +16,15 @@
     </aside>
 
     <main class="deck" aria-live="polite">
-      <section class="slide title-slide" data-title="Title">
-        <p class="eyebrow">Guide</p>
-        <h1>GitHub Pages 公開手順</h1>
+      <section class="slide title-slide" data-title="Title" data-group="はじめに">
+        <p class="eyebrow">はじめに</p>
+        <h1 class="title">GitHub Pages 公開手順</h1>
         <p class="lead">任意のサイトを GitHub Pages で公開するまでの流れを説明します。</p>
       </section>
 
-      <section class="slide" data-title="Overview">
-        <p class="eyebrow">Overview</p>
-        <h2>GitHub Pages とは</h2>
+      <section class="slide" data-title="Overview" data-group="はじめに">
+        <p class="eyebrow">はじめに</p>
+        <h2 class="title">GitHub Pages とは</h2>
         <ul>
           <li>GitHub リポジトリから静的サイトを無料で公開できるサービスです。</li>
           <li>HTML / CSS / JavaScript など、ビルド済みのファイルをそのまま配信できます。</li>
@@ -32,9 +32,9 @@
         </ul>
       </section>
 
-      <section class="slide" data-title="Prepare">
-        <p class="eyebrow">Step 1</p>
-        <h2>事前準備</h2>
+      <section class="slide" data-title="Prepare" data-group="公開手順">
+        <p class="eyebrow">公開手順</p>
+        <h2 class="title">事前準備</h2>
         <ol>
           <li>GitHub アカウントを作成する</li>
           <li>公開したいサイトのファイルを用意する</li>
@@ -43,9 +43,9 @@
         <p>トップページは <code>index.html</code> を置いた場所（通常はリポジトリ root）になります。</p>
       </section>
 
-      <section class="slide" data-title="Branch">
-        <p class="eyebrow">Step 2A</p>
-        <h2>ブランチから公開</h2>
+      <section class="slide" data-title="Branch" data-group="公開手順">
+        <p class="eyebrow">公開手順</p>
+        <h2 class="title">ブランチから公開</h2>
         <p>ビルド不要の静的サイト向けの簡単な方法です。</p>
         <ol>
           <li>リポジトリの <code>Settings</code> → <code>Pages</code> を開く</li>
@@ -55,9 +55,9 @@
         </ol>
       </section>
 
-      <section class="slide" data-title="Actions">
-        <p class="eyebrow">Step 2B</p>
-        <h2>GitHub Actions で公開</h2>
+      <section class="slide" data-title="Actions" data-group="公開手順">
+        <p class="eyebrow">公開手順</p>
+        <h2 class="title">GitHub Actions で公開</h2>
         <p>任意のフォルダ構成や、将来の自動デプロイに向いています。</p>
         <ol>
           <li><code>.github/workflows/</code> にワークフローを追加する</li>
@@ -67,9 +67,9 @@
         <p><code>Settings</code> → <code>Pages</code> の Source は <code>GitHub Actions</code> を選びます。</p>
       </section>
 
-      <section class="slide" data-title="Workflow Setup">
-        <p class="eyebrow">Step 2B — Detail</p>
-        <h2>ワークフローの設定手順</h2>
+      <section class="slide" data-title="Workflow Setup" data-group="ワークフロー">
+        <p class="eyebrow">ワークフロー</p>
+        <h2 class="title">ワークフローの設定手順</h2>
         <ol>
           <li>リポジトリ root に <code>.github/workflows/</code> フォルダを作成する</li>
           <li>その中に <code>deploy.yml</code>（名前は任意）を作成する</li>
@@ -80,9 +80,9 @@
         <p>初回 push 後に自動でジョブが起動し、成功すると Pages に反映されます。</p>
       </section>
 
-      <section class="slide" data-title="Workflow">
-        <p class="eyebrow">Example</p>
-        <h2>ワークフロー例</h2>
+      <section class="slide" data-title="Workflow" data-group="ワークフロー">
+        <p class="eyebrow">ワークフロー</p>
+        <h2 class="title">ワークフロー例</h2>
         <p>リポジトリ全体をそのまま公開する最小構成です。</p>
         <pre><code>name: Deploy static content to Pages
 
@@ -107,9 +107,9 @@ jobs:
       - uses: actions/deploy-pages@v5</code></pre>
       </section>
 
-      <section class="slide" data-title="Action Versions">
-        <p class="eyebrow">Note</p>
-        <h2>@v4 / @v5 の意味</h2>
+      <section class="slide" data-title="Action Versions" data-group="ワークフロー">
+        <p class="eyebrow">ワークフロー</p>
+        <h2 class="title">@v4 / @v5 の意味</h2>
         <p><code>uses: actions/checkout@v4</code> の <code>@v4</code> は、使用する Action のバージョンを指定するタグです。</p>
         <ul>
           <li>GitHub Actions の各ステップは <strong>Action</strong> と呼ばれる再利用可能な処理単位です。</li>
@@ -119,9 +119,9 @@ jobs:
         </ul>
       </section>
 
-      <section class="slide" data-title="Verify">
-        <p class="eyebrow">Step 3</p>
-        <h2>公開を確認する</h2>
+      <section class="slide" data-title="Verify" data-group="確認・Tips">
+        <p class="eyebrow">確認・Tips</p>
+        <h2 class="title">公開を確認する</h2>
         <ol>
           <li><code>Settings</code> → <code>Pages</code> に表示される URL を開く</li>
           <li>Actions タブでデプロイが <code>success</code> になっているか確認する</li>
@@ -130,9 +130,9 @@ jobs:
         <p>更新が反映されないときは、ブラウザのキャッシュを消して確認してください。</p>
       </section>
 
-      <section class="slide" data-title="Tips">
-        <p class="eyebrow">Tips</p>
-        <h2>よくあるポイント</h2>
+      <section class="slide" data-title="Tips" data-group="確認・Tips">
+        <p class="eyebrow">確認・Tips</p>
+        <h2 class="title">よくあるポイント</h2>
         <ul>
           <li>公開対象は静的ファイルのみです（PHP や DB は動きません）。</li>
           <li>リポジトリが Private でも Pages 公開は可能です（プランにより制限あり）。</li>

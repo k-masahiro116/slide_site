@@ -20,6 +20,13 @@
       "eyebrow": "Guide",
       "description": "任意のサイトを GitHub Pages で公開する手順を説明します。",
       "href": "slides/github-pages/"
+    },
+    {
+      "id": "microwave-wpt",
+      "title": "マイクロ波給電 第６章",
+      "eyebrow": "Lecture",
+      "description": "送受電効率の解析式・飛行デモ実験・UAVへのワイヤレス給電の実現可能性",
+      "href": "slides/microwave-wpt/"
     }
   ]
 }
