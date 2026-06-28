@@ -67,6 +67,19 @@
         <p><code>Settings</code> → <code>Pages</code> の Source は <code>GitHub Actions</code> を選びます。</p>
       </section>
 
+      <section class="slide" data-title="Workflow Setup">
+        <p class="eyebrow">Step 2B — Detail</p>
+        <h2>ワークフローの設定手順</h2>
+        <ol>
+          <li>リポジトリ root に <code>.github/workflows/</code> フォルダを作成する</li>
+          <li>その中に <code>deploy.yml</code>（名前は任意）を作成する</li>
+          <li><code>Settings</code> → <code>Pages</code> → <code>Source</code> を <code>GitHub Actions</code> に変更する</li>
+          <li>ファイルを <code>main</code> ブランチへ push する</li>
+          <li><code>Actions</code> タブで実行状況を確認する</li>
+        </ol>
+        <p>初回 push 後に自動でジョブが起動し、成功すると Pages に反映されます。</p>
+      </section>
+
       <section class="slide" data-title="Workflow">
         <p class="eyebrow">Example</p>
         <h2>ワークフロー例</h2>
@@ -92,6 +105,18 @@ jobs:
         with:
           path: "."
       - uses: actions/deploy-pages@v5</code></pre>
+      </section>
+
+      <section class="slide" data-title="Action Versions">
+        <p class="eyebrow">Note</p>
+        <h2>@v4 / @v5 の意味</h2>
+        <p><code>uses: actions/checkout@v4</code> の <code>@v4</code> は、使用する Action のバージョンを指定するタグです。</p>
+        <ul>
+          <li>GitHub Actions の各ステップは <strong>Action</strong> と呼ばれる再利用可能な処理単位です。</li>
+          <li><code>@v4</code> や <code>@v5</code> はそのメジャーバージョンを示し、破壊的変更が入ると番号が上がります。</li>
+          <li>バージョンを固定することで、予期しない挙動の変化を防げます。</li>
+          <li><code>@main</code> や <code>@latest</code> で常に最新を使うこともできますが、安定性のためバージョン固定が推奨です。</li>
+        </ul>
       </section>
 
       <section class="slide" data-title="Verify">
