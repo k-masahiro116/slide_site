@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="GitHub Pages slide deck" />
+    <title>Slide Site</title>
+    <link rel="stylesheet" href="../../styles.css" />
+  </head>
+  <body class="deck-page">
+    <a class="back-link" href="../../">← スライド一覧</a>
+
+    <aside class="toc" aria-label="スライド目次">
+      <p class="toc-title">目次</p>
+      <ol class="toc-list"></ol>
+    </aside>
+
+    <main class="deck" aria-live="polite">
+      <section class="slide title-slide" data-title="Title">
+        <p class="eyebrow">GitHub Pages Slide Deck</p>
+        <h1>Slide Site</h1>
+        <p class="lead">このスライドを編集して、GitHub Pages で公開できます。</p>
+      </section>
+
+      <section class="slide" data-title="Purpose">
+        <p class="eyebrow">Overview</p>
+        <h2>このプロジェクトについて</h2>
+        <ul>
+          <li>ビルド不要の静的サイトです。</li>
+          <li>GitHub Pages の root 配信でそのまま動きます。</li>
+          <li>HTML を編集するだけでスライドを追加できます。</li>
+        </ul>
+      </section>
+
+      <section class="slide" data-title="Edit">
+        <p class="eyebrow">Editing</p>
+        <h2>スライドの追加方法</h2>
+        <p>
+          <code>slides/&lt;名前&gt;/index.html</code> に
+          <code>&lt;section class="slide"&gt;</code> を追加してください。
+        </p>
+        <pre><code>&lt;section class="slide" data-title="New"&gt;
+  &lt;h2&gt;新しいスライド&lt;/h2&gt;
+  &lt;p&gt;本文を書きます。&lt;/p&gt;
+&lt;/section&gt;</code></pre>
+      </section>
+
+      <section class="slide" data-title="Publish">
+        <p class="eyebrow">Publish</p>
+        <h2>公開設定</h2>
+        <ol>
+          <li>GitHub に push</li>
+          <li>Settings -> Pages を開く</li>
+          <li>Deploy from a branch / main / root を選択</li>
+        </ol>
+      </section>
+    </main>
+
+    <nav class="controls" aria-label="Slide controls">
+      <button class="control" type="button" data-action="prev" aria-label="Previous slide">‹</button>
+      <span class="counter" aria-label="Slide count">
+        <span id="current-slide">1</span>/<span id="total-slides">1</span>
+      </span>
+      <button class="control" type="button" data-action="next" aria-label="Next slide">›</button>
+    </nav>
+
+    <div class="progress" aria-hidden="true">
+      <div class="progress-bar"></div>
+    </div>
+
+    <script src="../../script.js"></script>
+  </body>
+</html>

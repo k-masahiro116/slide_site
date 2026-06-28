@@ -4,13 +4,27 @@ GitHub Pages でスライドを公開するための静的サイトです。
 
 ## 使い方
 
-1. `index.html` の `<section class="slide">` を編集してスライドを追加します。
-2. GitHub に push します。
-3. GitHub リポジトリの `Settings` -> `Pages` で、`Deploy from a branch`、`main`、`/ (root)` を選択します。
+1. トップページ（`index.html`）からスライドを選んで表示します。
+2. 新しいスライドを追加する場合:
+   - `slides/<名前>/index.html` を作成
+   - `slides/manifest.json` に表紙情報を登録
+3. GitHub に push します。
+4. GitHub リポジトリの `Settings` -> `Pages` で、GitHub Actions によるデプロイを有効にします。
+
+## ディレクトリ構成
+
+```text
+index.html              # スライド選択画面
+catalog.js              # 選択画面の描画
+styles.css              # 共通スタイル
+script.js               # スライド表示用スクリプト
+slides/
+  manifest.json         # スライド一覧の定義
+  intro/index.html      # スライド本体
+  sample/index.html
+```
 
 ## ローカル確認
-
-ブラウザで `index.html` を開くか、簡易サーバーを起動して確認できます。
 
 ```sh
 python3 -m http.server 8000
@@ -24,4 +38,3 @@ python3 -m http.server 8000
 - 前へ: `Left` / `Up`
 - 最初へ: `Home`
 - 最後へ: `End`
-

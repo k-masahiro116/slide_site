@@ -27,6 +27,141 @@ body {
     var(--bg);
 }
 
+.back-link {
+  position: fixed;
+  top: 18px;
+  left: calc(250px + 18px);
+  z-index: 3;
+  padding: 8px 14px;
+  border: 1px solid rgba(23, 32, 38, 0.14);
+  border-radius: 999px;
+  color: var(--muted);
+  background: rgba(255, 250, 241, 0.82);
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-decoration: none;
+  backdrop-filter: blur(10px);
+}
+
+.back-link:hover {
+  color: var(--ink);
+}
+
+.catalog-page {
+  padding: clamp(32px, 6vw, 72px);
+}
+
+.catalog-header {
+  width: min(100%, 1280px);
+  margin: 0 auto clamp(28px, 5vw, 48px);
+}
+
+.catalog-header h1 {
+  max-width: none;
+  font-size: clamp(3.2rem, 10vw, 6.5rem);
+}
+
+.catalog-lead {
+  margin: 18px 0 0;
+  max-width: 640px;
+  color: var(--muted);
+  font-size: clamp(1.1rem, 2.4vw, 1.45rem);
+  line-height: 1.6;
+}
+
+.catalog {
+  width: min(100%, 1280px);
+  margin: 0 auto;
+}
+
+.catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(18px, 3vw, 28px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.deck-card {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.deck-card-cover {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  box-shadow: var(--shadow);
+  transition:
+    transform 180ms ease-out,
+    box-shadow 180ms ease-out;
+}
+
+.deck-card-frame {
+  container-type: inline-size;
+  position: relative;
+  aspect-ratio: 1040 / 680;
+  overflow: hidden;
+}
+
+.deck-card-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 1040px;
+  height: 680px;
+  padding: 80px;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  transform-origin: top left;
+  transform: scale(calc(100cqw / 1040px));
+}
+
+.deck-card-slide .eyebrow {
+  margin-bottom: 18px;
+  font-size: 12.48px;
+}
+
+.deck-card-slide h1 {
+  max-width: 12ch;
+  font-size: 144px;
+  line-height: 0.96;
+}
+
+.deck-card-slide .lead {
+  margin-top: 30px;
+  max-width: 760px;
+  font-size: 32px;
+  line-height: 1.65;
+}
+
+.deck-card:hover .deck-card-cover,
+.deck-card:focus-visible .deck-card-cover {
+  transform: translateY(-4px);
+  box-shadow: 0 22px 70px rgba(23, 32, 38, 0.2);
+}
+
+.deck-card-label {
+  display: block;
+  margin: 12px 4px 0;
+  color: var(--ink);
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.catalog-error {
+  color: var(--muted);
+  font-size: 1rem;
+}
+
 .toc {
   position: fixed;
   top: 0;
@@ -278,6 +413,19 @@ pre code {
 }
 
 @media (max-width: 720px) {
+  .back-link {
+    top: 12px;
+    left: 12px;
+  }
+
+  .catalog-page {
+    padding: 24px 18px 40px;
+  }
+
+  .catalog-grid {
+    grid-template-columns: 1fr;
+  }
+
   .toc {
     position: sticky;
     top: 0;

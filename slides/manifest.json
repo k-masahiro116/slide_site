@@ -1,0 +1,25 @@
+{
+  "decks": [
+    {
+      "id": "intro",
+      "title": "Slide Site",
+      "eyebrow": "GitHub Pages Slide Deck",
+      "description": "このスライドを編集して、GitHub Pages で公開できます。",
+      "href": "slides/intro/"
+    },
+    {
+      "id": "sample",
+      "title": "Sample Deck",
+      "eyebrow": "Example",
+      "description": "2枚構成のサンプルスライドです。",
+      "href": "slides/sample/"
+    },
+    {
+      "id": "github-pages",
+      "title": "GitHub Pages 公開手順",
+      "eyebrow": "Guide",
+      "description": "任意のサイトを GitHub Pages で公開する手順を説明します。",
+      "href": "slides/github-pages/"
+    }
+  ]
+}

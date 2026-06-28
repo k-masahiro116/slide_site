@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="GitHub Pages で任意のサイトを公開する手順" />
+    <title>GitHub Pages 公開手順</title>
+    <link rel="stylesheet" href="../../styles.css" />
+  </head>
+  <body class="deck-page">
+    <a class="back-link" href="../../">← スライド一覧</a>
+
+    <aside class="toc" aria-label="スライド目次">
+      <p class="toc-title">目次</p>
+      <ol class="toc-list"></ol>
+    </aside>
+
+    <main class="deck" aria-live="polite">
+      <section class="slide title-slide" data-title="Title">
+        <p class="eyebrow">Guide</p>
+        <h1>GitHub Pages 公開手順</h1>
+        <p class="lead">任意のサイトを GitHub Pages で公開するまでの流れを説明します。</p>
+      </section>
+
+      <section class="slide" data-title="Overview">
+        <p class="eyebrow">Overview</p>
+        <h2>GitHub Pages とは</h2>
+        <ul>
+          <li>GitHub リポジトリから静的サイトを無料で公開できるサービスです。</li>
+          <li>HTML / CSS / JavaScript など、ビルド済みのファイルをそのまま配信できます。</li>
+          <li>公開 URL は <code>https://&lt;ユーザー名&gt;.github.io/&lt;リポジトリ名&gt;/</code> です。</li>
+        </ul>
+      </section>
+
+      <section class="slide" data-title="Prepare">
+        <p class="eyebrow">Step 1</p>
+        <h2>事前準備</h2>
+        <ol>
+          <li>GitHub アカウントを作成する</li>
+          <li>公開したいサイトのファイルを用意する</li>
+          <li>GitHub にリポジトリを作成し、ファイルを push する</li>
+        </ol>
+        <p>トップページは <code>index.html</code> を置いた場所（通常はリポジトリ root）になります。</p>
+      </section>
+
+      <section class="slide" data-title="Branch">
+        <p class="eyebrow">Step 2A</p>
+        <h2>ブランチから公開</h2>
+        <p>ビルド不要の静的サイト向けの簡単な方法です。</p>
+        <ol>
+          <li>リポジトリの <code>Settings</code> → <code>Pages</code> を開く</li>
+          <li><code>Build and deployment</code> で <code>Deploy from a branch</code> を選ぶ</li>
+          <li>Branch を <code>main</code>、Folder を <code>/ (root)</code> に設定</li>
+          <li><code>Save</code> を押して数分待つ</li>
+        </ol>
+      </section>
+
+      <section class="slide" data-title="Actions">
+        <p class="eyebrow">Step 2B</p>
+        <h2>GitHub Actions で公開</h2>
+        <p>任意のフォルダ構成や、将来の自動デプロイに向いています。</p>
+        <ol>
+          <li><code>.github/workflows/</code> にワークフローを追加する</li>
+          <li><code>main</code> ブランチへ push する</li>
+          <li>Actions の実行が成功すると Pages に反映される</li>
+        </ol>
+        <p><code>Settings</code> → <code>Pages</code> の Source は <code>GitHub Actions</code> を選びます。</p>
+      </section>
+
+      <section class="slide" data-title="Workflow">
+        <p class="eyebrow">Example</p>
+        <h2>ワークフロー例</h2>
+        <p>リポジトリ全体をそのまま公開する最小構成です。</p>
+        <pre><code>name: Deploy static content to Pages
+
+on:
+  push:
+    branches: ["main"]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: "."
+      - uses: actions/deploy-pages@v5</code></pre>
+      </section>
+
+      <section class="slide" data-title="Verify">
+        <p class="eyebrow">Step 3</p>
+        <h2>公開を確認する</h2>
+        <ol>
+          <li><code>Settings</code> → <code>Pages</code> に表示される URL を開く</li>
+          <li>Actions タブでデプロイが <code>success</code> になっているか確認する</li>
+          <li>表示が古い場合は、数分待ってから再読み込みする</li>
+        </ol>
+        <p>更新が反映されないときは、ブラウザのキャッシュを消して確認してください。</p>
+      </section>
+
+      <section class="slide" data-title="Tips">
+        <p class="eyebrow">Tips</p>
+        <h2>よくあるポイント</h2>
+        <ul>
+          <li>公開対象は静的ファイルのみです（PHP や DB は動きません）。</li>
+          <li>リポジトリが Private でも Pages 公開は可能です（プランにより制限あり）。</li>
+          <li>サブディレクトリ配信では、リンクや画像パスを相対パスにすると安全です。</li>
+          <li>複数デプロイが重なると古い版が表示されることがあります。Actions の最新成功版を確認してください。</li>
+        </ul>
+      </section>
+    </main>
+
+    <nav class="controls" aria-label="Slide controls">
+      <button class="control" type="button" data-action="prev" aria-label="Previous slide">‹</button>
+      <span class="counter" aria-label="Slide count">
+        <span id="current-slide">1</span>/<span id="total-slides">1</span>
+      </span>
+      <button class="control" type="button" data-action="next" aria-label="Next slide">›</button>
+    </nav>
+
+    <div class="progress" aria-hidden="true">
+      <div class="progress-bar"></div>
+    </div>
+
+    <script src="../../script.js"></script>
+  </body>
+</html>
