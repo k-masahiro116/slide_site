@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="マイクロ波給電 第６章後半" />
+    <meta name="description" content="マイクロ波給電 第６章" />
     <title>マイクロ波給電 第６章</title>
     <link rel="stylesheet" href="../../styles.css" />
   </head>
@@ -20,13 +20,110 @@
       <!-- ======================================================
            6.7  飛行デモンストレーション結果
       ====================================================== -->
-      <section class="slide title-slide "
+      <section class="slide title-slide"
                data-title="6.7 飛行デモンストレーション結果"
                data-group="6.7 飛行デモンストレーション結果">
         <p class="eyebrow">第６章</p>
         <h1>飛行デモンストレーション結果</h1>
-        <p class="lead">飛行デモンストレーションの結果を示す。</p>
-        <p>ここに本文・図・表を追加してください。</p>
+        <p class="lead">UAV へのマイクロ波ワイヤレス給電を実証した飛行実験の概要と結果を示す。</p>
+      </section>
+
+      <section class="slide"
+               data-title="実験系の構成"
+               data-group="6.7 飛行デモンストレーション結果">
+        <p class="eyebrow">6.7</p>
+        <h2>実験系の構成（図 6-14）</h2>
+        <ul>
+          <li>送電アンテナ（ホーンアンテナ + DRO 発振器）を地上に設置し、UAV が高さ <strong>0.8 m</strong> でホバリング。</li>
+          <li>受電レクテナ（2×2 並列接続）を UAV に搭載し、DC 電力をマイコンで検出。</li>
+          <li>高さ 0.8 m は地面効果が無視できる高さであり、かつ先行研究との比較に合わせた設定。</li>
+          <li>追尾システムを<strong>使用した場合</strong>と<strong>使用しない場合</strong>の両条件で各 30 秒間実施。</li>
+        </ul>
+        <div class="image-container">
+          <img src="../../images/slide_site1.png" alt="実験系の構成図"
+               style="max-width:100%; max-height:400px; border-radius:8px; box-shadow:0 4px 24px rgba(23,32,38,0.14);" />
+        </div>
+      </section>
+
+      <section class="slide"
+               data-title="UAV の XY 変位（図 6-15）"
+               data-group="6.7 飛行デモンストレーション結果">
+        <p class="eyebrow">6.7</p>
+        <h2>UAV の XY 変位（図 6-15）</h2>
+        <ul>
+          <li>追尾あり（w/）の場合、UAV の姿勢変位が小さくビーム範囲内に収まっていた。</li>
+          <li>追尾なし（w/o）の場合、X 方向変位が 10 cm 程度、Y 方向変位が 20 cm を超えビーム追尾範囲外となる場面があった。</li>
+          <li>高さ方向でも 20 cm 以上の急降下が 2〜3 回発生（室内 GPS ユニットとの通信途絶が原因）。</li>
+          <li>実験系全体として最大 20 cm ほどの誤差が生じ、DC 出力が変動した。</li>
+        </ul>
+        <div class="image-container">
+          <img src="../../images/slide_site2.png" alt="UAV の XY 変位図"
+               style="max-width:100%; max-height:400px; border-radius:8px; box-shadow:0 4px 24px rgba(23,32,38,0.14);" />
+        </div>
+      </section>
+
+      <section class="slide"
+               data-title="DC 出力電力の比較（図 6-16a）"
+               data-group="6.7 飛行デモンストレーション結果">
+        <p class="eyebrow">6.7</p>
+        <h2>DC 出力電力の比較（図 6-16a）</h2>
+        <ul>
+          <li>追尾システムを使用した場合、最小 DC 出力は <strong>10 mW</strong>。</li>
+          <li>追尾システムを使用しない場合、DC 出力は 0.01 mW まで落ち込み、RF 電力を受電できない時間帯があった。</li>
+          <li>追尾の有無に関わらず、ロール角・ピッチ角・ヨー角はすべて <strong>±3° 未満</strong>で安定（図 6-16b, c）。</li>
+        </ul>
+      </section>
+
+      <section class="slide"
+               data-title="UAV の x,y,h 変位（図 6-16d, e）"
+               data-group="6.7 飛行デモンストレーション結果">
+        <p class="eyebrow">6.7</p>
+        <h2>送電アンテナ中心から見た UAV の x,y,h 変位（図 6-16d, e）</h2>
+        <ul>
+          <li>追尾あり（d）：変位の振れ幅が小さく、ビーム照射が維持された。</li>
+          <li>追尾なし（e）：x・y 変位が最大 ±25 cm 程度まで拡大し、h（高さ）の急落も確認。</li>
+          <li>x 方向の誤差 ±15 cm 以上、y 方向 −10〜−25 cm で追尾範囲外となる。</li>
+          <li>高さ誤差は最大 40 cm に及び、ビーム追尾があっても DC 出力を大きく変動させた。</li>
+        </ul>
+      </section>
+
+      <section class="slide"
+               data-title="受電効率の比較（図 6-16f, g）"
+               data-group="6.7 飛行デモンストレーション結果">
+        <p class="eyebrow">6.7</p>
+        <h2>受電効率 η<sub>exp</sub> と η<sub>A</sub> の比較（図 6-16f, g）</h2>
+        <ul>
+          <li>追尾ありの場合、η<sub>exp</sub> の最大値は <strong>t = 15.4 s で 0.9 %</strong>；η<sub>A</sub> は 0.43 %。</li>
+          <li>t = 15.4 s 時点の各効率：η<sub>beam</sub> = 4 %、η<sub>cap</sub> = 30 %、η<sub>tra</sub> = 90 %、η<sub>RF-DC</sub> = 40 %。</li>
+          <li>ビーム角 α が 5° を超えると η<sub>cap</sub> は 25 % 以下に低下（UAV 位置が 7 cm ずれ、高さ 0.8 m では 26 % 減少）。</li>
+          <li>α > 10° の場合（t = 7〜9 s、19〜20 s）、η<sub>tra</sub>・η<sub>RF-DC</sub> はそれぞれ 30 % 未満・0.001 % 未満に大幅劣化。</li>
+          <li>η<sub>beam</sub> の最大値が 5 % にとどまった原因：レクテナが 4 素子のみで水平変位最大 20 cm だったため。</li>
+        </ul>
+      </section>
+
+      <section class="slide"
+               data-title="反射・サイドローブの影響"
+               data-group="6.7 飛行デモンストレーション結果">
+        <p class="eyebrow">6.7</p>
+        <h2>マイクロ波の反射・サイドローブの影響</h2>
+        <ul>
+          <li>11〜12 s・26〜28 s で η<sub>A</sub> が η<sub>exp</sub> を再現できなかった主因は、<strong>地面・壁面からのマイクロ波反射</strong>とサイドローブの照射。</li>
+          <li>η<sub>A</sub> はビームフォーミングしたメインローブの直接波にのみ適用できるため、屋内環境では誤差が生じやすい。</li>
+          <li>屋外の長距離伝送実験では反射・サイドローブの影響がなく、η<sub>A</sub> はより精度よく η<sub>exp</sub> を再現できると考えられる。</li>
+        </ul>
+      </section>
+
+      <section class="slide"
+               data-title="6.7 まとめ"
+               data-group="6.7 飛行デモンストレーション結果">
+        <p class="eyebrow">6.7 まとめ</p>
+        <h2>飛行デモンストレーション結果のまとめ</h2>
+        <ul>
+          <li>追尾システムにより、ビーム範囲内への UAV 誘導が維持され DC 出力の途絶を防止。</li>
+          <li>最大 DC 受電効率 <strong>η<sub>exp</sub> = 0.9 %</strong>（t = 15.4 s）を達成。</li>
+          <li>姿勢（ロール・ピッチ・ヨー）は追尾有無に関わらず ±3° 以内で安定。</li>
+          <li>今後の課題：レクテナ素子数の増加、屋外長距離伝送実験による検証。</li>
+        </ul>
       </section>
 
       <!-- ======================================================
