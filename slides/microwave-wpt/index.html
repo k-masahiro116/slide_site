@@ -700,65 +700,112 @@
       </section>
 
       <section class="slide"
-               data-title="6.9 ワイヤレス給電の実現可能性"
-               data-group="6.9 UAVへのワイヤレス給電の実現可能性">
+      data-title="6.9 ワイヤレス給電の実現可能性"
+      data-group="6.9 UAVへのワイヤレス給電の実現可能性">
         <p class="eyebrow">6.9 システム検討</p>
         <h2 class="title">UAVへのワイヤレス給電の実現可能性</h2>
-        <p>実験室レベルから「バッテリーレス連続飛行」へスケールアップするための、周波数選定および構造的実現可能性の評価方針です。</p>
-        <div class="two-col">
-          <ul>
-            <li><strong>ビーム結像限界：</strong>波長が短いほど（高周波）送信アンテナ口径を小さくできる。しかし、大気中を伝播する際の減衰特性（特に降雨環境）とのトレードオフ。</li>
-            <li><strong>受電重量ペイロード：</strong>レクテナの平米あたり重量と、ドローンが持ち上げられる推力限界の天秤。<strong>「WPTで得られる電力 > 搭載レクテナ自重分の消費電力」</strong> の成立性。</li>
-          </ul>
-          <ul>
-            <li><strong>システム総合効率のターゲット：</strong>送電端からUAVモーター入力までの総和効率。将来的に <strong>10 % 以上</strong> の確保が実用化のブレイクスルーラインとなる。</li>
-          </ul>
-        </div>
+        <p style="font-size: 0.85rem; color: var(--muted); margin-bottom: 12px;">
+          本章では、UAVへの28GHzMPTを、菅沼らの解析結果と先行研究で行われてきた5.8GHzWPT、現状のバッテリー性能と比較して実現可能性を論じる。<br>
+          本研究では、以下の2条件が満たされる場合に「28 GHz MPT（マイクロ波送電）が実現可能」と定義する。
+        </p>
+
+        <ul>
+          <li>
+            <strong>給電電力の担保（条件1）：</strong><br>
+            <strong>1 MW 以下の送電電力</strong>で、高度 50 m を飛行中の UAV の消費電力以上の DC 出力が得られること。
+          </li>
+          <li>
+            <strong>軽量な電源システム（条件2）：</strong><br>
+            UAV に搭載する受電レクテナアレーおよび電力統合ユニットが、<strong>現状のバッテリーよりも軽量</strong>な電源となること。
+          </li>
+        </ul>
       </section>
 
       <section class="slide"
-               data-title="6.9.1 5.8GHz・28GHz 効率比較"
-               data-group="6.9 UAVへのワイヤレス給電の実現可能性">
+            data-title="6.9.1 5.8GHz・28GHz 効率比較"
+            data-group="6.9 UAVへのワイヤレス給電の実現可能性">
         <p class="eyebrow">6.9.1 解析比較</p>
-        <h2 class="title">5.8 GHz・28 GHz の解析効率比較</h2>
-        <p>同じ送電距離 10 m、UAVサイズ（レクテナ面積）を一定とした場合の理論効率の比較検討です。</p>
+        <h2 class="title">5.8 GHz・28 GHz の解析効率比較 (AR.Drone 2.0)</h2>
+        <p style="font-size: 0.85rem; color: var(--muted); margin-bottom: 12px;">
+        AR.Drone 2.0（底面 9 cm × 15 cm レクテナアレー想定）における高度別の最大解析効率 η<sub>A,max</sub> と、最適な送電ビームウエスト ω<sub>0</sub> の比較。
+        </p>
         <table class="data-table">
-          <thead>
-            <tr>
-              <th>周波数</th>
-              <th>ビーム捕捉率 (η<sub>beam</sub>)</th>
-              <th>回路・透過率 (η<sub>tra</sub>)</th>
-              <th>整流効率 (η<sub>RF-DC</sub>)</th>
-              <th>総合伝送効率</th>
-              <th>主要なメリット・課題</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td><strong>5.8 GHz</strong></td><td>低 (12%)</td><td>優 (94%)</td><td>高 (70〜80%)</td><td>約 8.5 %</td><td>デバイスが安価・高効率だが、送電側アンテナが巨大化。</td></tr>
-            <tr class="highlight"><td><strong>28 GHz</strong></td><td>高 (45%)</td><td>良 (85%)</td><td>中 (40〜55%)</td><td><strong>約 17.2 %</strong></td><td>長距離でもビームが絞れるが、半導体高出力化と発熱に課題。</td></tr>
-          </tbody>
+        <thead>
+          <tr>
+            <th>飛行高度 (z)</th>
+            <th>28 GHz 効率 (η<sub>A,max</sub>)</th>
+            <th>28 GHz ビームウエスト (ω<sub>0</sub>)</th>
+            <th>5.8 GHz 効率 (η<sub>A,max</sub>)</th>
+            <th>5.8 GHz ビームウエスト (ω<sub>0</sub>)</th>
+            <th>28 GHz の優位性 (倍率)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>0.8 m</strong></td>
+            <td>12.0 %</td>
+            <td>5 cm</td>
+            <td>2.6 %</td>
+            <td>11 cm</td>
+            <td><strong>約 4.6 倍</strong> 優位</td>
+          </tr>
+          <tr>
+            <td><strong>5.0 m</strong></td>
+            <td>3.5 %</td>
+            <td>13 cm</td>
+            <td>0.45 %</td>
+            <td>29 cm</td>
+            <td><strong>約 7.7 倍</strong> 優位</td>
+          </tr>
+          <tr class="highlight">
+            <td><strong>10.0 m</strong></td>
+            <td>1.9 %</td>
+            <td>19 cm</td>
+            <td>0.25 %</td>
+            <td>41 cm</td>
+            <td><strong>約 7.6 倍</strong> 優位</td>
+          </tr>
+        </tbody>
         </table>
-        <p class="slide-note">短距離では5.8 GHzが有利だが、運用距離が10 mを超えると28 GHz（ミリ波帯）のビーム収束性が総合効率で逆転する。</p>
+        <p class="slide-note" style="margin-top:12px;">
+        <strong>4000 W級大型UAV（底面1.79 ㎡の1/4にレクテナ搭載）の場合：</strong>高度 50 m 以下で 28 GHz MPT を用いれば、η<sub>A,max</sub> は <strong>10 % 以上</strong>を確保可能（高度 100 m でも 6.2 %、ω<sub>0</sub> = 58cm）。
+        </p>
       </section>
 
       <section class="slide"
-               data-title="6.9.2 バッテリー性能との比較"
-               data-group="6.9 UAVへのワイヤレス給電の実現可能性">
-        <p class="eyebrow">6.9.2 損益分岐点</p>
-        <h2 class="title">バッテリー性能との比較（2020年時点）</h2>
-        <p>現行のリチウムポリマー（LiPo）二次電池システムとWPT給電システムの優劣を運用面から定量化します。</p>
+            data-title="6.9.2 バッテリー性能との比較"
+            data-group="6.9 UAVへのワイヤレス給電の実現可能性">
+        <p class="eyebrow">6.9.2 システム評価</p>
+        <h2 class="title">送電電力および重量性能の評価（2020年時点）</h2>
+        <p style="font-size: 0.85rem; color: var(--muted); margin-bottom: 12px;">
+        高度 50 m（送電アンテナ直径 1 m）における受電 DC 電力および、レクテナとバッテリーの重量比比較。
+        </p>
         <div class="two-col">
-          <ul>
-            <li><strong>LiPo バッテリーの限界：</strong>エネルギー密度 約 <strong>250 Wh/kg</strong>。産業用ドローンの飛行時間は積載量に関わらず 20〜40 分で頭打ち。</li>
-            <li><strong>WPT 給電ドローンの特性：</strong>初期自重はレクテナ分（＋給電補助用の小型バッファ電池）で固定。運用時間が <strong>45分を超える</strong> 長期ミッションで重量対エネルギー効率の損益分岐点に達する。</li>
-          </ul>
-          <ul>
-            <li><strong>用途展望：</strong>固定位置での定点監視（ダム、インフラ点検）、有線ドローンの代替、災害時の臨時通信ベースステーション。</li>
-          </ul>
+        <ul>
+          <li>
+            <strong>高度 50 m での給電成立性：</strong><br>
+            5.8 GHz では 1 MW の送電電力を供給しても消費電力を賄えない。一方、<strong>28 GHz では 200 kW の送電電力</strong>で 4000 W 級 UAV の消費電力をクリア可能。1 MW 送電であれば、消費電力の約 10 倍を得られるため充電も可能となる。
+          </li>
+          <li>
+            <strong>機体重量に占める電源の割合：</strong><br>
+            通常、バッテリー重量は機体全体の約 30 %（0.3倍）を占める。本研究の窒化ケイ素（シリコン）製ダイオードを用いたレクテナは 90 g 以上の機体でバッテリーと同等重量になってしまう。
+          </li>
+        </ul>
+        <ul>
+          <li>
+            <strong>GaNダイオード採用による軽量化：</strong><br>
+            整流回路に 20 W 入力可能な <strong>GaN（窒化ガリウム）ダイオード</strong>を用いる場合、<strong>65 g 以上の機体重量においてバッテリー重量比（0.3倍）を下回り</strong>、電源の大幅な軽量化が達成できる。
+          </li>
+          <li>
+            <strong>28 GHz 送電の課題：</strong><br>
+            5.8 GHz に比べて送電ビーム半径が大幅に絞られるため、風などの外乱に抗する<strong>飛行精度の高い制御（PID制御など）システムが不可欠</strong>となる。
+          </li>
+        </ul>
         </div>
-        <p class="slide-note">結論として、2020年時点の技術水準において、直径 1 m 級の送電アンテナと1 kW級のSSPAソースを用いれば、高度 20 m での「バッテリーレス無限ホバリング」は理論上十分に達成可能と判断される。</p>
+        <p class="slide-note" style="margin-top:12px;">
+        結論として、「高精度な測位・制御システム」と「GaN ダイオードを用いたレクテナ」の開発推進により、高効率・大電力を要する実用的な UAV へのワイヤレス給電が実現可能と判断される。
+        </p>
       </section>
-
     </main>
 
     <nav class="controls" aria-label="Slide controls">
