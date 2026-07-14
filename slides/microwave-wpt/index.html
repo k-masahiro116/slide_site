@@ -6,6 +6,120 @@
     <meta name="description" content="マイクロ波給電 第６章" />
     <title>マイクロ波給電 第６章</title>
     <link rel="stylesheet" href="../../styles.css" />
+    <style>
+      /* ── 表 ── */
+      .data-table-left {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 24px;
+        font-size: clamp(0.72rem, 1.5vw, 0.95rem);
+      }
+      .data-table-left th {
+        background: var(--accent);
+        color: #fff;
+        padding: 8px 12px;
+        text-align: left;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+      }
+      .data-table-left td {
+        padding: 7px 12px;
+        border-bottom: 1px solid var(--line);
+        color: var(--muted);
+        text-align: left;
+      }
+      .data-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 24px;
+        font-size: clamp(0.72rem, 1.5vw, 0.95rem);
+      }
+      .data-table th {
+        background: var(--accent);
+        color: #fff;
+        padding: 8px 12px;
+        text-align: center;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+      }
+      .data-table td {
+        padding: 7px 12px;
+        border-bottom: 1px solid var(--line);
+        color: var(--muted);
+        text-align: center;
+      }
+      .data-table tr:nth-child(even) td { background: rgba(15,118,110,0.05); }
+      .data-table td:first-child { text-align: left; font-weight: 600; color: var(--ink); }
+      .data-table .highlight td { background: rgba(180,83,9,0.10); color: var(--ink); font-weight: 700; }
+
+      /* ── 効率分解バー ── */
+      .eta-bar-wrap { margin-top: 28px; display: grid; gap: 10px; }
+      .eta-row { display: flex; align-items: center; gap: 12px; font-size: 0.88rem; }
+      .eta-label { width: 90px; flex-shrink: 0; color: var(--ink); font-weight: 700; }
+      .eta-track { flex: 1; height: 22px; background: var(--line); border-radius: 4px; overflow: hidden; }
+      .eta-fill { height: 100%; border-radius: 4px; background: var(--accent); transition: width .4s; display: flex; align-items: center; padding-left: 6px; color: #fff; font-size: 0.78rem; font-weight: 700; }
+      .eta-fill.low { background: #b45309; }
+      .eta-value { width: 52px; text-align: right; flex-shrink: 0; color: var(--muted); font-weight: 600; font-size: 0.88rem; }
+
+      /* ── 2カラムレイアウト ── */
+      .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 20px; }
+      .two-col ul { margin-top: 0; }
+
+      /* ── 画像比較（2列） ── */
+      .image-compare-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        margin-top: 20px;
+      }
+
+      .image-col-title {
+        margin: 0 0 8px;
+        font-size: 0.88rem;
+        font-weight: 800;
+        color: var(--accent-strong);
+        text-align: center;
+      }
+
+      .image-compare-grid .image-container {
+        margin-top: 0;
+        margin-bottom: 12px;
+      }
+
+      .image-compare-grid .image-caption {
+        font-size: 0.75rem;
+        line-height: 1.4;
+      }
+
+      /* ── 式ボックス ── */
+      .formula-box {
+        margin-top: 20px;
+        padding: 14px 18px;
+        border-left: 4px solid var(--accent);
+        border-radius: 0 6px 6px 0;
+        background: rgba(15,118,110,0.07);
+        font-size: clamp(0.88rem, 1.8vw, 1.05rem);
+        color: var(--ink);
+        font-family: "Georgia", serif;
+      }
+      .formula-box .formula-label {
+        font-size: 0.75rem;
+        font-weight: 800;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--accent-strong);
+        margin-bottom: 6px;
+        font-family: inherit;
+      }
+
+      /* ── キーポイントカード ── */
+      .kp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 24px; }
+      .kp-card { padding: 14px 16px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); }
+      .kp-card .kp-num { font-size: clamp(1.6rem, 4vw, 2.2rem); font-weight: 800; color: var(--accent); line-height: 1; }
+      .kp-card .kp-unit { font-size: 0.8rem; font-weight: 700; color: var(--accent); }
+      .kp-card .kp-desc { margin-top: 6px; font-size: 0.82rem; color: var(--muted); line-height: 1.45; }
+
+    </style>
   </head>
   <body class="deck-page">
     <a class="back-link" href="../../">← スライド一覧</a>
@@ -17,45 +131,209 @@
 
     <main class="deck" aria-live="polite">
 
-      <!-- ======================================================
-           6.7  飛行デモンストレーション結果
-      ====================================================== -->
       <section class="slide title-slide"
-               data-title="6.7 飛行デモンストレーション結果"
+               data-title="第６章 タイトル"
                data-group="6.7 飛行デモンストレーション結果">
-        <p class="eyebrow">第６章</p>
-        <h1>飛行デモンストレーション結果</h1>
-        <p class="lead">UAV へのマイクロ波ワイヤレス給電を実証した飛行実験の概要と結果を示す。</p>
+        <p class="eyebrow">第６章 飛翔体への給電実験</p>
+        <h1 class="title">飛行デモンストレーション結果</h1>
+        <p class="lead">28 GHz マイクロ波ワイヤレス給電（WPT）を用いた UAV 自由飛行実証実験の概要・解析・結果</p>
+        <p class="slide-note">参考文献：Suganuma et al., <em>Journal of Spacecraft and Rockets</em>, Vol. 59, No. 1, 2022 / 教科書 §6.7</p>
+      </section>
+
+      <section class="slide"
+               data-title="過去の WPT 実証実験との比較"
+               data-group="6.7 飛行デモンストレーション結果">
+        <p class="eyebrow">6.7 飛行デモンストレーション結果 - 背景</p>
+        <h2 class="title">過去の WPT 自由飛行実証との比較</h2>
+        <p>本実験は <strong>28 GHz（ミリ波帯）</strong> を用いた世界的に珍しい UAV 自由飛行 WPT 実証です。</p>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>実験</th>
+              <th>周波数 (GHz)</th>
+              <th>送電電力 (W)</th>
+              <th>WPT 効率 (%)</th>
+              <th>距離 (m)</th>
+              <th>機体</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Brown – NASA (1963)</td><td>3.0</td><td>5,000</td><td>15</td><td>5.5</td><td>ヘリコプター</td></tr>
+            <tr><td>MILAX (1992)</td><td>2.45</td><td>1,000</td><td>10</td><td>10</td><td>飛行機</td></tr>
+            <tr><td>SHARP (1987)</td><td>2.45</td><td>10,000</td><td>1.5</td><td>150</td><td>飛行機</td></tr>
+            <tr class="highlight"><td>本実験（2022）</td><td>28</td><td>5.3</td><td><strong>0.9</strong></td><td>0.8</td><td>ドローン</td></tr>
+          </tbody>
+        </table>
+        <p class="slide-note">高周波ほどビーム指向性が上がり UAV への伝送効率は向上するが、回路損失も増加する。本実験は小電力・近距離での概念実証。</p>
       </section>
 
       <section class="slide"
                data-title="実験系の構成"
                data-group="6.7 飛行デモンストレーション結果">
-        <p class="eyebrow">6.7</p>
-        <h2>実験系の構成（図 6-14）</h2>
-        <ul>
-          <li>送電アンテナ（ホーンアンテナ + DRO 発振器）を地上に設置し、UAV が高さ <strong>0.8 m</strong> でホバリング。</li>
-          <li>受電レクテナ（2×2 並列接続）を UAV に搭載し、DC 電力をマイコンで検出。</li>
-          <li>高さ 0.8 m は地面効果が無視できる高さであり、かつ先行研究との比較に合わせた設定。</li>
-          <li>追尾システムを<strong>使用した場合</strong>と<strong>使用しない場合</strong>の両条件で各 30 秒間実施。</li>
-        </ul>
+        <p class="eyebrow">6.7 飛行デモンストレーション結果 - 実験系</p>
+        <h2 class="title">実験系の構成（図 6-14）</h2>
+        <div class="two-col">
+          <ul>
+            <li><strong>送電側：</strong>DRO 発振器＋固体電力増幅器＋ホーンアンテナ（19.2 dBi）×2 本。送電電力 <strong>5.3 W</strong>。</li>
+            <li><strong>受電側：</strong>28 GHz レクテナ（4 素子、2×2 並列）を UAV 背面に搭載。RF→DC 変換後、マイコンで電力検出。</li>
+            <li><strong>飛行高度：</strong>地面効果が無視できる <strong>0.8 m</strong>（地面効果消失高度 0.78 m 以上）。</li>
+          </ul>
+          <ul>
+            <li><strong>ビーム追尾：</strong>屋内 GPS（5 台、更新レート 7.4 Hz）で UAV 位置を常時取得し、アナログ位相シフタでビーム方向を補正。</li>
+            <li><strong>実験条件：</strong>追尾あり（w/）・追尾なし（w/o）の各 30 秒間を比較。</li>
+            <li><strong>UAV：</strong>AR.Drone 2.0（Parrot）、420 g、PID 自律制御、ホバリング水平誤差 ±0.2 m。</li>
+          </ul>
+        </div>
         <div class="image-container">
           <img src="../../images/slide_site1.png" alt="実験系の構成図"
                style="max-width:100%; max-height:400px; border-radius:8px; box-shadow:0 4px 24px rgba(23,32,38,0.14);" />
         </div>
+        <div class="slide-note">
+          <strong>注釈：DRO 発振器 (Dielectric Resonator Oscillator)</strong><br>
+          誘電体共振器発振器。電気的 Q 値が非常に高い誘電体セラミックス（共振器）を帰還回路に組み込むことで、マイクロ波・ミリ波帯において極めて高安定かつ低位相雑音な周波数信号を出力する高周波水源。本実験の 28 GHz 送電系では、基準信号源としてDRO発振器が用いられ、その後段の固体電力増幅器（SSPA）で <span class="strong-val">5.3 W</span> まで電力を増幅させている。
+        </div>
       </section>
 
       <section class="slide"
-               data-title="UAV の XY 変位（図 6-15）"
+               data-title="ビーム追尾システムの仕組み"
                data-group="6.7 飛行デモンストレーション結果">
-        <p class="eyebrow">6.7</p>
-        <h2>UAV の XY 変位（図 6-15）</h2>
+        <p class="eyebrow">6.7 飛行デモンストレーション結果 - 追尾システム</p>
+        <h2 class="title">ビーム追尾システムの仕組み</h2>
         <ul>
-          <li>追尾あり（w/）の場合、UAV の姿勢変位が小さくビーム範囲内に収まっていた。</li>
-          <li>追尾なし（w/o）の場合、X 方向変位が 10 cm 程度、Y 方向変位が 20 cm を超えビーム追尾範囲外となる場面があった。</li>
-          <li>高さ方向でも 20 cm 以上の急降下が 2〜3 回発生（室内 GPS ユニットとの通信途絶が原因）。</li>
-          <li>実験系全体として最大 20 cm ほどの誤差が生じ、DC 出力が変動した。</li>
+          <li>屋内 GPS が UAV 位置を取得し、送電アンテナから見た傾き角 α を算出。</li>
+          <li>アナログ位相シフタへ位相差 Φ を入力してビームを偏向させる。</li>
         </ul>
+        <div class="formula-box">
+          <p class="formula-label">式 (1) ビーム偏向角</p>
+          α = sin⁻¹ ( λΦ / 2πd )
+          <br><small>λ：波長、Φ：入力位相角、d：送信素子間距離</small>
+        </div>
+        <ul style="margin-top:18px; margin-bottom:32px;">
+          <li>追尾はビーム半値幅 <strong>±10°</strong>、水平誤差の約 <strong>70 %</strong> をカバー。</li>
+          <li>追尾なしではビーム角 <strong>±10°</strong> 付近でヌルが発生し、受電が途絶する。</li>
+          <li>追尾は <strong>x 軸方向のみ</strong>有効（高さは 0.8 m 固定のため変化なし）。</li>
+        </ul>
+        <div class="slide-note">
+          <strong>注釈：アナログ位相シフタ (Analog Phase Shifter)</strong><br>
+          印加する制御電圧を連続的に変化させることで、通過する高周波（マイクロ波・ミリ波）信号の位相量を無段階（連続的）に制御する電子部品。デジタル式のような量子化誤差（ステップ幅による制限）がなく、きわめて滑らかで高精度なビームステアリング（指向性制御）を可能にする。本実験では、屋内GPSから得られたUAVの位置変動データ（x軸方向）をもとに、この位相シフタの電圧をリアルタイムに制御してミリ波ビームを追従させている。
+        </div>
+      </section>
+
+      <section class="slide"
+               data-title="解析効率モデル η_A"
+               data-group="6.7 飛行デモンストレーション結果">
+        <p class="eyebrow">6.7 飛行デモンストレーション結果 - 解析モデル</p>
+        <h2 class="title">解析伝送効率モデル</h2>
+               
+        <p style="font-size: 0.85rem; color: var(--muted); margin-bottom: 12px;">
+          送電アンテナから出力されたミリ波が、ドローンに搭載されたレクテナ（受電アンテナ＋整流回路）で最終的なDC（直流）電力へ変換されるまでの各プロセスの損失をモデル化したものです。
+        </p>
+
+        <div class="formula-box">
+          <p class="formula-label">式 (2) 全体効率</p>
+          η<sub>A</sub> = η<sub>beam</sub> · η<sub>air</sub> · η<sub>cap</sub> · η<sub>tra</sub> · η<sub>RF-DC</sub> · η<sub>com</sub> 
+        </div>
+  
+        <table class="data-table-left" style="margin-top:16px;">
+          <thead>
+            <tr>
+              <th>効率因子</th>
+              <th>物理的な意味（プロセス）</th>
+              <th>主な支配要因と補足</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>η<sub>beam</sub></td>
+              <td>ビーム捕捉効率</td>
+              <td>放射されたガウスビームの広がり（スポットサイズ）に対し、ドローン側レクテナの開口面積（受電面）が占める割合。大半の電波は受電面を通り過ぎるため低くなる。</td>
+              </tr>
+              <tr>
+                <td>η<sub>air</sub></td>
+                <td>大気透過効率</td>
+                <td>大気による電波の減衰。今回の実験距離（0.8 m）は極短距離であるため、損失はほぼゼロとして扱う。</td>
+              </tr>
+              <tr>
+                <td>η<sub>cap</sub></td>
+                <td>受電アンテナ捕集効率</td>
+                <td>
+                  レクテナ受電面に照射された電力に対する、回路へ入力された電力の比。<br>
+                  UAVの水平移動に伴う回収電力の低下、および機体の姿勢変化による受信利得の低下を表す。
+                </td>
+              </tr>
+              <tr>
+                <td>η<sub>tra</sub></td>
+                <td>アンテナ・整流回路透過効率</td>
+                <td>アンテナから整流回路へ電力が伝わる際の効率（反射損失）。高周波回路のインピーダンス整合状態（S<sub>11</sub>パラメータ）により評価される。</td>
+              </tr>
+              <tr>
+                <td>η<sub>RF-DC</sub></td>
+                <td>整流回路のRF-DC 変換効率</td>
+                <td>整流ダイオードがミリ波（高周波）をDC（直流）に変換する効率。回路への「入力電力の強さ」に強く依存し、最適入力時に最大56 %に達する。</td>
+              </tr>
+              <tr>
+                <td>η<sub>com</sub></td>
+                <td>レクテナの直流電力効率</td>
+                <td>先行研究における複数のレクテナを並列接続した際の回路的なDC（直流）損失（2 %）を考慮し、98%[固定]とする。</td>
+              </tr>
+          </tbody>
+        </table>
+
+        <!-- ── 追加：数値を理解しやすくするための補足 ── -->
+        <div class="slide-note" style="margin-top: 16px;">
+          <strong>【参考】t = 15.4 s 時の総合伝送効率（計算値）</strong><br>
+          上記各因子を掛け合わせた全体効率 η<sub>A</sub> は <strong>約 0.42 %</strong> となる。この時刻はドローンがホバリング中に水平方向へ移動（位置ズレ）し、受電角度や入力電力が変化した瞬間の解析値を示している。
+        </div>
+        <p class="slide-note">η<sub>cap</sub> と η<sub>RF-DC</sub> が効率を最も大きく制限する。ビーム角 α が変動するとこの 2 因子が連鎖的に劣化する。</p>
+        <div class="image-container">
+          <img src="../../images/slide_site3.png" alt="解析効率モデル"
+               style="max-width:100%; max-height:400px; border-radius:8px; box-shadow:0 4px 24px rgba(23,32,38,0.14);" />
+        </div>
+        <!-- ── 各式の詳しい説明ブロック ── -->
+        <div class="formula-details-section" style="margin-top: 24px; border-top: 1px solid var(--muted); padding-top: 16px;">
+          <h3 class="subtitle" style="font-size: 1.1rem; margin-bottom: 12px; color: var(--primary);">各数式の詳細解説</h3>
+          
+          <!-- 式 (1) -->
+          <div class="formula-detail-item" style="margin-bottom: 16px; padding: 12px; background: rgba(0,0,0,0.02); border-left: 4px solid #0076ff; border-radius: 0 4px 4px 0;">
+            <p style="margin: 0 0 6px 0; font-weight: bold; font-size: 0.9rem;">式 (1) ビーム放射角： α = sin<sup>-1</sup>(Φλ / 2πd)</p>
+            <p style="margin: 0; font-size: 0.8rem; color: var(--muted); line-height: 1.4;">
+              アンテナから見たUAVの方向（角度 α）に合わせて、適切なビームフォーミングを行うためのビーム制御角を算出する式です。波面の経路差と、移相器（Phase Shifter）に与えられる入力位相角（Φ）の差から導かれます。（λ: マイクロ波の波長、d: 送信アンテナ間の距離）。インドアGPSによる位置データに基づき絶えず再計算・更新することで、飛行中のドローンを追尾（トラッキング）します。
+            </p>
+          </div>
+
+          <!-- 式 (3) -->
+          <div class="formula-detail-item" style="margin-bottom: 16px; padding: 12px; background: rgba(0,0,0,0.02); border-left: 4px solid #0076ff; border-radius: 0 4px 4px 0;">
+            <p style="margin: 0 0 6px 0; font-weight: bold; font-size: 0.9rem;">式 (3) ビーム効率（η<sub>beam</sub>）の近似モデル</p>
+            <p style="margin: 0; font-size: 0.8rem; color: var(--muted); line-height: 1.4;">
+              送信アンテナの放射パターンをガウシアンビームと仮定し、受電側に到達する電力割合を評価する式です。式中の誤差関数（erf）は空間積分から導かれ、ビーム半径とレクテナ素子の長さ（L）からなる受電面への照射割合を示します。また、ビームフォーミングによる利得低下を表す利得係数（C<sub>beam</sub> = 0.01）や、ドローンの水平移動に伴う回収電力の減衰因子を含めてモデル化されています。
+            </p>
+          </div>
+
+          <!-- 式 (4) -->
+          <div class="formula-detail-item" style="margin-bottom: 16px; padding: 12px; background: rgba(0,0,0,0.02); border-left: 4px solid #0076ff; border-radius: 0 4px 4px 0;">
+            <p style="margin: 0 0 6px 0; font-weight: bold; font-size: 0.9rem;">式 (4) 受電アンテナ捕捉効率： η<sub>cap</sub> = η<sub>dis</sub> · (λ<sup>2</sup>G<sub>max</sub> / 4πA) · f<sub>E</sub>(α-φ) · f<sub>H</sub>(θ)</p>
+            <p style="margin: 0; font-size: 0.8rem; color: var(--muted); line-height: 1.4;">
+              レクテナ受電面に照射されたミリ波が、機体の傾きや位置ズレによってどれだけアンテナに捕捉されるかを計算する式です。第1項の η<sub>dis</sub>（0.75）は素子間隔（1.0λ）による配置損失を、第2項は最大アンテナ開口効率を表します。第3・第4項（f<sub>E</sub>, f<sub>H</sub>）は受信アンテナ利得のフィッティング関数であり、ロール角（φ）、ピッチ角（θ）、ビーム入射角（α）の変動による利得低下をダイナミックにシミュレートします。
+            </p>
+          </div>
+
+          <!-- 式 (5) -->
+          <div class="formula-detail-item" style="margin-bottom: 8px; padding: 12px; background: rgba(0,0,0,0.02); border-left: 4px solid #0076ff; border-radius: 0 4px 4px 0;">
+            <p style="margin: 0 0 6px 0; font-weight: bold; font-size: 0.9rem;">式 (5) 回路透過率： η<sub>tra</sub> = 1 - 10<sup>(S11,antenna/10)</sup> - 10<sup>(S11,rectifier/10)</sup></p>
+            <p style="margin: 0; font-size: 0.8rem; color: var(--muted); line-height: 1.4;">
+              高周波回路内への電波の「入り込みやすさ（透過特性）」を評価する式です。アンテナおよび整流回路でのインピーダンス不整合に起因する電波の反射損失（戻り）を差し引く構造になっています。具体的には、実験特性データである S<sub>11,antenna</sub>（アンテナ反射）および S<sub>11,rectifier</sub>（整流器反射）の各パラメータを用いることで、反射を免れて実際に回路で利用される電力の割合を的確に算出します。
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide"
+               data-title="UAV の位置変動（図 6-15）"
+               data-group="6.7 飛行デモンストレーション結果">
+        <p class="eyebrow">6.7 飛行デモンストレーション結果 - 実験結果①</p>
+        <h2 class="title">UAV の位置変動（図 6-15 / Fig. 3）</h2>
+        <p>図 6-15 は高度 0.8 m でのUAVの位置変動を示している。追尾あり（w/）と追尾なし（w/o）の場合を比較している。</p>
+        
         <div class="image-container">
           <img src="../../images/slide_site2.png" alt="UAV の XY 変位図"
                style="max-width:100%; max-height:400px; border-radius:8px; box-shadow:0 4px 24px rgba(23,32,38,0.14);" />
@@ -65,132 +343,394 @@
       <section class="slide"
                data-title="DC 出力電力の比較（図 6-16a）"
                data-group="6.7 飛行デモンストレーション結果">
-        <p class="eyebrow">6.7</p>
-        <h2>DC 出力電力の比較（図 6-16a）</h2>
-        <ul>
-          <li>追尾システムを使用した場合、最小 DC 出力は <strong>10 mW</strong>。</li>
-          <li>追尾システムを使用しない場合、DC 出力は 0.01 mW まで落ち込み、RF 電力を受電できない時間帯があった。</li>
-          <li>追尾の有無に関わらず、ロール角・ピッチ角・ヨー角はすべて <strong>±3° 未満</strong>で安定（図 6-16b, c）。</li>
+        <p class="eyebrow">6.7 飛行デモンストレーション結果 - 実験結果②</p>
+        <h2 class="title">DC 出力電力の比較1（図 6-16a）</h2>
+        <p style="font-size: 0.85rem; color: var(--muted); margin-bottom: 6px;">
+          追尾システムを搭載した場合と搭載しない場合で、UAVに取り付けられたレクテナから得られる30秒間のDC電力の変動を比較。
+        </p>
+        <div class="kp-grid">
+          <div class="kp-card">
+            <div class="kp-num">10 <span class="kp-unit">mW</span></div>
+            <div class="kp-desc">UAVの姿勢の変異が小さく、送電アンテナの直上に位置していたとき</div>
+          </div>
+          <div class="kp-card">
+            <div class="kp-num">0.01 <span class="kp-unit">mW</span></div>
+            <div class="kp-desc">追尾システムを使用したときの最小DC電力</div>
+          </div>
+        </div>
+        <ul style="margin-top:20px;">
+          <li>追尾なしでは、RF電力を受電できずDC出力ができない時間があった。</li>
+          <li>この結果をUAVの挙動から考察する。-> 次ページ以降で図 6-16 (b)(c)(d)(e)を参照。</li>
         </ul>
+        <div class="image-container">
+          <img src="../../images/slide_site5.png" alt="DC出力電力グラフ"
+               style="max-width:85%; max-height:400px; border-radius:8px; box-shadow:0 4px 24px rgba(23,32,38,0.14);" />
+          <p class="image-caption">図 6-16(a) UAV 飛行中のレクテナから得た DC 出力電力</p>
+        </div>
       </section>
+      
+      <section class="slide"
+      data-title="UAV挙動からの考察（図 6-16bcde）"
+      data-group="6.7 飛行デモンストレーション結果">
+      <p class="eyebrow">6.7 飛行デモンストレーション結果 - 実験結果③</p>
+      <h2 class="title">UAV挙動からの考察（図 6-16bcde）</h2>
+      <p style="font-size: 0.85rem; color: var(--muted); margin-bottom: 0px;">
+        図6-16(a)の結果をUAVの挙動から考察する。図6-16(b)(c)は飛行中30秒間のロール角・ピッチ角・ヨー角・ビーム方角を示す。
+        図6-16(d)(e)は送電アンテナの中心を原点としたXY平面における、飛行中30秒間のUAVの変位。
+      </p>
+      <ul style="margin-top:20px;">
+        <li>ロール角・ピッチ角・ヨー角は全て±3°未満で、追尾の有無に関わらず30秒間安定。</li>
+        <li>X方向の変位が10cm程度に対して、Y方向の変位は20cm以上でビーム追尾範囲から外れている。</li>
+        <li>高度についても20cm以上の急降下が2,3回発生している。屋内GPSユニットの通信が途絶えたため、UAVの姿勢修正ができていなかった。</li>
+      </ul>
+      <div class="image-compare-grid">
+        <div class="image-col">
+          <p class="image-col-title">追尾あり（w/）</p>
+          <div class="image-container">
+            <img src="../../images/slide_site6.png" alt="図 6-16(b)"
+            style="max-width:100%; max-height:180px; border-radius:8px; box-shadow:0 4px 24px rgba(23,32,38,0.14);" />
+            <p class="image-caption">図 6-16(b) ロール・ピッチ・ヨー角・ビーム方角</p>
+          </div>
+          <div class="image-container">
+            <img src="../../images/slide_site8.png" alt="図 6-16(d)"
+            style="max-width:100%; max-height:180px; border-radius:8px; box-shadow:0 4px 24px rgba(23,32,38,0.14);" />
+            <p class="image-caption">図 6-16(d) 変位</p>
+          </div>
+        </div>
+        <div class="image-col">
+          <p class="image-col-title">追尾なし（w/o）</p>
+          <div class="image-container">
+            <img src="../../images/slide_site7.png" alt="図 6-16(c)"
+            style="max-width:100%; max-height:180px; border-radius:8px; box-shadow:0 4px 24px rgba(23,32,38,0.14);" />
+            <p class="image-caption">図 6-16(c) ロール・ピッチ・ヨー角・ビーム方角</p>
+          </div>
+          <div class="image-container">
+            <img src="../../images/slide_site9.png" alt="図 6-16(e)"
+            style="max-width:100%; max-height:180px; border-radius:8px; box-shadow:0 4px 24px rgba(23,32,38,0.14);" />
+            <p class="image-caption">図 6-16(e) 変位</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <section class="slide"
+             data-title="DC 出力電力の比較（図 6-16a）"
+             data-group="6.7 飛行デモンストレーション結果">
+      <p class="eyebrow">6.7 飛行デモンストレーション結果 - 実験結果②</p>
+      <h2 class="title">DC 出力電力の比較2（図 6-16a）</h2>
+
+      <ul style="margin-top:20px;">
+        <li>x方向の誤差は±15cm以上、y方向の誤差は-10cm〜25cm以上の場合、追尾システムの範囲外となる。</li>
+        <li>高さhの誤差は最大40cm以上。</li>
+        <li>実験系全体として最大20cm以上の誤差が生じており、この影響でビーム追尾があってもDC出力が変動してしまっている。</li>
+      </ul>
+      <div class="image-container">
+        <img src="../../images/slide_site5.png" alt="DC出力電力グラフ"
+             style="max-width:85%; max-height:400px; border-radius:8px; box-shadow:0 4px 24px rgba(23,32,38,0.14);" />
+        <p class="image-caption">図 6-16(a) UAV 飛行中のレクテナから得た DC 出力電力</p>
+      </div>
+    </section>
 
       <section class="slide"
-               data-title="UAV の x,y,h 変位（図 6-16d, e）"
+               data-title="追尾ありの伝送効率"
                data-group="6.7 飛行デモンストレーション結果">
-        <p class="eyebrow">6.7</p>
-        <h2>送電アンテナ中心から見た UAV の x,y,h 変位（図 6-16d, e）</h2>
-        <ul>
-          <li>追尾あり（d）：変位の振れ幅が小さく、ビーム照射が維持された。</li>
-          <li>追尾なし（e）：x・y 変位が最大 ±25 cm 程度まで拡大し、h（高さ）の急落も確認。</li>
-          <li>x 方向の誤差 ±15 cm 以上、y 方向 −10〜−25 cm で追尾範囲外となる。</li>
-          <li>高さ誤差は最大 40 cm に及び、ビーム追尾があっても DC 出力を大きく変動させた。</li>
-        </ul>
-      </section>
+        <p class="eyebrow">6.7 飛行デモンストレーション結果 - 実験結果③</p>
+        <h2 class="title">追尾ありの伝送効率(図6-16f)</h2>
+        <p>
+          t=15.4sでη<sub>exp</sub>が最大値<strong>0.9 %</strong>となる。<br>
+          青のハイライトはビーム角αが5°を超えた範囲を示す。この範囲は、DC出力が10mW未満である時間とほぼ一致している。
+          一部、地面や壁面によるマイクロ波の反射とサイドローブの照射による影響か、理論値が実測値から外れている。
+          η<sub>A</sub>（理論値） = 0.43 % のとき、各因子は以下のとおり。
+        </p>
 
-      <section class="slide"
-               data-title="受電効率の比較（図 6-16f, g）"
-               data-group="6.7 飛行デモンストレーション結果">
-        <p class="eyebrow">6.7</p>
-        <h2>受電効率 η<sub>exp</sub> と η<sub>A</sub> の比較（図 6-16f, g）</h2>
-        <ul>
-          <li>追尾ありの場合、η<sub>exp</sub> の最大値は <strong>t = 15.4 s で 0.9 %</strong>；η<sub>A</sub> は 0.43 %。</li>
-          <li>t = 15.4 s 時点の各効率：η<sub>beam</sub> = 4 %、η<sub>cap</sub> = 30 %、η<sub>tra</sub> = 90 %、η<sub>RF-DC</sub> = 40 %。</li>
-          <li>ビーム角 α が 5° を超えると η<sub>cap</sub> は 25 % 以下に低下（UAV 位置が 7 cm ずれ、高さ 0.8 m では 26 % 減少）。</li>
-          <li>α > 10° の場合（t = 7〜9 s、19〜20 s）、η<sub>tra</sub>・η<sub>RF-DC</sub> はそれぞれ 30 % 未満・0.001 % 未満に大幅劣化。</li>
-          <li>η<sub>beam</sub> の最大値が 5 % にとどまった原因：レクテナが 4 素子のみで水平変位最大 20 cm だったため。</li>
-        </ul>
+        <div class="image-container">
+          <img src="../../images/slide_site10.png"
+               style="max-width:85%; max-height:400px; border-radius:8px; box-shadow:0 4px 24px rgba(23,32,38,0.14);" />
+          <p class="image-caption">図 6-16(g) 追尾を使用した実験のη<sub>exp</sub>とη<sub>A</sub>の比較</p>
+        </div>
+        <div class="slide-note">
+          <strong>注釈：η<sub>exp</sub></strong> ...
+          測定値、実測値<br>
+          <strong>注釈：η<sub>A</sub></strong> ...
+          予測値、理論値
+        </div>
       </section>
-
+      
       <section class="slide"
-               data-title="反射・サイドローブの影響"
+               data-title="追尾ありの伝送効率"
                data-group="6.7 飛行デモンストレーション結果">
-        <p class="eyebrow">6.7</p>
-        <h2>マイクロ波の反射・サイドローブの影響</h2>
+        <p class="eyebrow">6.7 飛行デモンストレーション結果 - 実験結果④</p>
+        <h2 class="title">ビーム角超過時の連鎖劣化メカニズム(図6-16g)</h2>
+        <p>
+          図6-16(g)でη<sub>A</sub>をη<sub>beam</sub>,η<sub>cap</sub>,η<sub>tra</sub>,η<sub>RF-DC</sub>に分解して考察する。<br>
+          以下はt=15.4sのときの値で、このときη<sub>exp</sub>=0.9 %, η<sub>A</sub>=0.43 %<br>
+        </p>
+        <div class="eta-bar-wrap">
+          <div class="eta-row">
+            <span class="eta-label">η<sub>beam</sub></span>
+            <div class="eta-track"><div class="eta-fill low" style="width:4%;">4%</div></div>
+            <span class="eta-value">4 %</span>
+          </div>
+          <div class="eta-row">
+            <span class="eta-label">η<sub>cap</sub></span>
+            <div class="eta-track"><div class="eta-fill" style="width:30%;">30%</div></div>
+            <span class="eta-value">30 %</span>
+          </div>
+          <div class="eta-row">
+            <span class="eta-label">η<sub>tra</sub></span>
+            <div class="eta-track"><div class="eta-fill" style="width:90%;">90%</div></div>
+            <span class="eta-value">90 %</span>
+          </div>
+          <div class="eta-row">
+            <span class="eta-label">η<sub>RF-DC</sub></span>
+            <div class="eta-track"><div class="eta-fill" style="width:40%;">40%</div></div>
+            <span class="eta-value">40 %</span>
+          </div>
+        </div>
+        <p style="margin-top:16px;">
+          <strong>ボトルネック：</strong>η<sub>beam</sub>（4 %）が最も低い。レクテナが 4 素子しかなく、水平変位 20 cm があったため。
+        </p>
+        <div class="image-container">
+          <img src="../../images/slide_site11.png"
+               style="max-width:85%; max-height:400px; border-radius:8px; box-shadow:0 4px 24px rgba(23,32,38,0.14);" />
+          <p class="image-caption">図 6-16(g) フライト中の各効率のばらつき</p>
+        </div>
         <ul>
-          <li>11〜12 s・26〜28 s で η<sub>A</sub> が η<sub>exp</sub> を再現できなかった主因は、<strong>地面・壁面からのマイクロ波反射</strong>とサイドローブの照射。</li>
-          <li>η<sub>A</sub> はビームフォーミングしたメインローブの直接波にのみ適用できるため、屋内環境では誤差が生じやすい。</li>
-          <li>屋外の長距離伝送実験では反射・サイドローブの影響がなく、η<sub>A</sub> はより精度よく η<sub>exp</sub> を再現できると考えられる。</li>
+          <li>α が <strong>5° を超える</strong>と η<sub>cap</sub> が 25 % 以下に低下。高さ 0.8 m では 7 cm のズレが 5° に相当。</li>
+          <li>α が <strong>10° を超える</strong>（t = 7〜9 s、19〜20 s）と入力電力が極端に不足し、η<sub>tra</sub> と η<sub>RF-DC</sub> が連鎖的に劣化。</li>
+        </ul>
+        <div class="formula-box" style="margin-top:18px;">
+          <p class="formula-label">α > 10° のとき</p>
+          η<sub>tra</sub> &lt; 30 %、η<sub>RF-DC</sub> &lt; 0.001 %（通常時比で 10,000 分の 1 以下）
+        </div>
+        <ul style="margin-top:18px;">
+          <li>η<sub>RF-DC</sub> と η<sub>tra</sub> は <strong>入力電力に依存</strong>するため、ビームが外れると小さな受電電力が更に変換効率を落とすという二重の損失が生じる。</li>
+          <li>この連鎖劣化を防ぐには、ビーム追尾精度の向上が最優先課題。</li>
         </ul>
       </section>
 
       <section class="slide"
                data-title="6.7 まとめ"
                data-group="6.7 飛行デモンストレーション結果">
-        <p class="eyebrow">6.7 まとめ</p>
-        <h2>飛行デモンストレーション結果のまとめ</h2>
+        <p class="eyebrow">6.7 飛行デモンストレーション結果 - まとめ</p>
+        <h2 class="title">飛行デモンストレーション結果のまとめ</h2>
         <ul>
-          <li>追尾システムにより、ビーム範囲内への UAV 誘導が維持され DC 出力の途絶を防止。</li>
-          <li>最大 DC 受電効率 <strong>η<sub>exp</sub> = 0.9 %</strong>（t = 15.4 s）を達成。</li>
-          <li>姿勢（ロール・ピッチ・ヨー）は追尾有無に関わらず ±3° 以内で安定。</li>
-          <li>今後の課題：レクテナ素子数の増加、屋外長距離伝送実験による検証。</li>
+          <li>28 GHz・5.3 W 送電、0.8 m 距離、UAV 自由飛行での WPT 実証に成功。</li>
+          <li>ビーム追尾システムにより DC 出力の途絶を防止し、最大 DC 受電効率 <strong>η<sub>exp</sub> = 0.9 %</strong>（t = 15.4 s）を達成。</li>
+          <li>姿勢（ロール・ピッチ・ヨー）は追尾有無に関わらず <strong>±3° 以内</strong>で安定。</li>
+          <li>ビーム角 α が 5° 以内に保たれている限り、解析モデル η<sub>A</sub> は実測をよく再現。</li>
+          <li><strong>今後の課題：</strong>①レクテナ素子数の増加、②水平位置精度の向上、③屋外・長距離での実証実験。</li>
         </ul>
+        <p class="slide-note">アンテナ間 WPT 効率を固定飛行実験と比較すると本実験は約 2.3 % 相当（RF-DC 損失を差し引き）となり、自由飛行では追尾精度が律速となることが示された。</p>
       </section>
 
-      <!-- ======================================================
-           6.8  慶長・茂呂らによる飛行デモンストレーション実験
-      ====================================================== -->
       <section class="slide"
                data-title="6.8 飛行デモンストレーション実験"
                data-group="6.8 飛行デモンストレーション実験">
-        <p class="eyebrow">6.8</p>
-        <h2>慶長・茂呂らによる飛行デモンストレーション実験</h2>
-        <p>ここに実験概要・背景を追加してください。</p>
+        <p class="eyebrow">6.8 概要</p>
+        <h2 class="title">慶長・茂呂らによる飛行デモンストレーション実験</h2>
+        <p>慶長・茂呂らは <strong>2022年</strong> に飛行デモンストレーション実験を実施した。本節では先行研究である菅沼の実験からの改善点と実験結果を示す。</p>
+        <ul>
+          <li><strong>6.8.1 受電アンテナ：</strong>4アレー → <strong>16アレーパッチアンテナ</strong>（4直列4並列）へ拡張し、ビーム収集効率と整流回路への RF 電力を向上。</li>
+          <li><strong>6.8.2 UAV制御：</strong>比例制御（IFT法最適化）→ <strong>PI・PID制御</strong> へ変更し、外乱に強い飛行制御を実現。</li>
+          <li><strong>6.8.3 実験結果：</strong>位相制御の有無を比較し、出力電力・送電電効率・連続給電時間を評価。菅沼らの実験より安定した長時間 DC 出力を達成。</li>
+        </ul>
+        <p class="slide-note">周波数は 28 GHz、機体は AR.Drone 2.0（Parrot）を用い、送電系は菅沼の実験と同一構成である。</p>
       </section>
 
-      <!-- 6.8.1 -->
       <section class="slide"
                data-title="6.8.1 受電アンテナ"
                data-group="6.8 飛行デモンストレーション実験">
-        <p class="eyebrow">6.8.1</p>
-        <h2>受電アンテナ：16アレーパッチアンテナ</h2>
-        <p>ここに本文・図を追加してください。</p>
+        <p class="eyebrow">6.8.1 受電アンテナ</p>
+        <h2 class="title">16アレーパッチアンテナ</h2>
+        <p style="font-size: 0.85rem; color: var(--muted); margin-bottom: 6px;">
+          菅沼の4アレーパッチアンテナでは、ビーム収集効率が最大 <strong>4 %</strong> 程度と低く、整流回路に印加できる RF 電力が小さかった。
+        </p>
+        <ul>
+          <li>慶長は受電面積増加によるビーム収集効率向上と、整流回路への RF 電力量増加による整流効率向上のため、<strong>16アレー</strong>（4直列4並列給電）構造に変更した。</li>
+          <li>詳細寸法は図 6-17(a)、表 6-6、作製アンテナは図 6-17(b) に示す。</li>
+        </ul>
+        <table class="data-table-left" style="margin-top:16px; max-width:480px;">
+          <thead>
+            <tr><th colspan="2">表 6-6　16アレーパッチアンテナの寸法</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>dx</td><td>7.0 mm</td></tr>
+            <tr><td>dy</td><td>6.8 mm</td></tr>
+            <tr><td>W</td><td>4.4 mm</td></tr>
+            <tr><td>L</td><td>3.3 mm</td></tr>
+            <tr><td>L1</td><td>3.5 mm</td></tr>
+            <tr><td>L2</td><td>1.0 mm</td></tr>
+            <tr><td>L3</td><td>1.0 mm</td></tr>
+          </tbody>
+        </table>
+        <div class="kp-grid" style="grid-template-columns: 1fr 1fr; margin-top: 20px;">
+          <div class="kp-card">
+            <div class="kp-num">−13.8 <span class="kp-unit">dB</span></div>
+            <div class="kp-desc">28 GHz における S<sub>11</sub></div>
+          </div>
+          <div class="kp-card">
+            <div class="kp-num">18.7 <span class="kp-unit">dBi</span></div>
+            <div class="kp-desc">28 GHz におけるアンテナゲイン</div>
+          </div>
+        </div>
+        <div class="image-container">
+          <img src="../../images/slide_site12.png"
+               style="max-width:85%; max-height:400px; border-radius:8px; box-shadow:0 4px 24px rgba(23,32,38,0.14);" />
+          <p class="image-caption">図 6-17(a)：16アレーパッチアンテナの概略図 (b)作製したアンテナ</p>
+        </div>
       </section>
 
-      <!-- 6.8.2 -->
       <section class="slide"
                data-title="6.8.2 UAV制御"
                data-group="6.8 飛行デモンストレーション実験">
-        <p class="eyebrow">6.8.2</p>
-        <h2>UAV制御：PI・PID制御の導入</h2>
-        <p>ここに本文・制御ブロック図を追加してください。</p>
+        <p class="eyebrow">6.8.2 UAV制御</p>
+        <h2 class="title">PI・PID制御の導入</h2>
+        <div class="two-col">
+          <ul>
+            <li><strong>菅沼の課題：</strong>UAV は比例制御＋IFT法によるパラメータ最適化を実施。外乱により飛行が乱れ、ビーム範囲外に出ることで DC 出力が不安定になった。</li>
+            <li><strong>茂呂の改善：</strong>比例制御から <strong>PID制御</strong> へ変更し、外乱に強い制御を目指した。</li>
+          </ul>
+          <ul>
+            <li><strong>高度・ヨー角：</strong>PI制御。パラメータは北森の調整法により伝達関数から解析的に決定。</li>
+            <li><strong>XY平面の変位・ロール・ピッチ：</strong>PID制御。パラメータは MATLAB による繰り返し演算で決定。</li>
+          </ul>
+        </div>
+        <p style="margin-top:18px;">P制御のみと PI・PID制御の飛行性能比較を図 6-18 に示す。IFT法で最適化した P制御に比べ、PI・PID制御は <strong>XY平面</strong> と <strong>高さ方向 Z</strong> に対してより誤差の少ない飛行が可能であることが示された。</p>
+        <ul style="margin-top:12px;">
+          <li>
+            <div class="image-container">
+              <img src="../../images/slide_site13.png"
+                   style="max-width:85%; max-height:400px; border-radius:8px; box-shadow:0 4px 24px rgba(23,32,38,0.14);" />
+              <p class="image-caption">図 6-18(a)：x 方向誤差の確率分布（実線＝IFT controller、破線＝Proposed PID）</p>
+            </div>
+          </li>
+          <li>
+            <div class="image-container">
+              <img src="../../images/slide_site14.png"
+                   style="max-width:85%; max-height:400px; border-radius:8px; box-shadow:0 4px 24px rgba(23,32,38,0.14);" />
+              <p class="image-caption">図 6-18(b)：y 方向誤差の確率分布</p>
+            </div>
+          </li>
+          <li>
+            <div class="image-container">
+              <img src="../../images/slide_site15.png"
+                   style="max-width:85%; max-height:400px; border-radius:8px; box-shadow:0 4px 24px rgba(23,32,38,0.14);" />
+              <p class="image-caption">図 6-18(c)：z 方向誤差の確率分布</p>
+            </div>
+
+          </li>
+        </ul>
       </section>
 
-      <!-- 6.8.3 -->
+      <section class="slide"
+               data-title="6.8.3 実験系"
+               data-group="6.8 飛行デモンストレーション実験">
+        <p class="eyebrow">6.8.3 飛行デモンストレーション実験</p>
+        <h2 class="title">実験系と測定条件</h2>
+        <div class="two-col">
+          <ul>
+            <li><strong>機体：</strong>AR.Drone 2.0（Parrot）。</li>
+            <li><strong>送電系：</strong>菅沼の実験と同じ系。2アレー化ホーンアンテナ、合計送電電力 <strong>35.8 dBm</strong>。</li>
+            <li><strong>受電側：</strong>2×2 の4アレーを並列接続したレクテナ（図 6-19）。</li>
+          </ul>
+          <ul>
+            <li><strong>飛行条件：</strong>ホーンアンテナから高度 <strong>1.2 m</strong> でホバリング。レクテナで得た DC 出力をマイコンで計測。</li>
+            <li><strong>比較条件：</strong>位相制御なし vs 位相制御あり。出力電力・送電電効率・連続給電時間を検討。</li>
+          </ul>
+        </div>
+        <p class="slide-note" style="margin-top:16px;">図 6-19：(a) ドローン底部の4アレーアンテナ、(b) 4素子整流回路基板。</p>
+      </section>
+
       <section class="slide"
                data-title="6.8.3 飛行デモ実験結果"
                data-group="6.8 飛行デモンストレーション実験">
-        <p class="eyebrow">6.8.3</p>
-        <h2>飛行デモンストレーション実験結果</h2>
-        <p>ここに本文・グラフ・写真を追加してください。</p>
+        <p class="eyebrow">6.8.3 実験結果</p>
+        <h2 class="title">飛行デモンストレーション実験結果</h2>
+        <p style="font-size: 0.85rem; color: var(--muted); margin-bottom: 6px;">
+          図 6-20〜22 に位相制御の有無による x, y 方向誤差と出力電力の時間推移を示す。飛行時間 16–64 s では x, y 誤差は <strong>±0.2 m 以下</strong>に抑えられた（位相制御の有無にかかわらず）。
+        </p>
+        <ul>
+          <li>0–16 s、64–80 s で誤差が大きくなるのは、離着陸時のリアルタイム制御開始・終了によるもの。</li>
+          <li>電力が検出されない箇所は、マイコンの検出限界 <strong>−40 dBm</strong> と仮定。</li>
+        </ul>
+        <table class="data-table" style="margin-top:16px;">
+          <thead>
+            <tr>
+              <th>評価項目</th>
+              <th>位相制御なし</th>
+              <th>位相制御あり</th>
+              <th>改善比</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>平均出力電力</td><td>−4.06 dBm</td><td>1.42 dBm</td><td><strong>約 2 倍</strong></td></tr>
+            <tr><td>連続給電時間</td><td>—</td><td>—</td><td><strong>約 9 倍</strong></td></tr>
+            <tr><td>最大出力電力</td><td>基準</td><td>—</td><td><strong>1.02 倍</strong></td></tr>
+            <tr><td>最大送受電効率</td><td>基準</td><td>—</td><td><strong>約 1.07 倍</strong></td></tr>
+          </tbody>
+        </table>
+        <p class="slide-note" style="margin-top:16px;">28 GHz・高度 1.2 m の給電において最も長い連続給電に成功。菅沼らの実験より安定した長時間 DC 出力とより長距離送受電効率を達成した（表 6-7、図 6-22 参照）。</p>
       </section>
 
-      <!-- ======================================================
-           6.9  UAVへのワイヤレス給電の実現可能性
-      ====================================================== -->
       <section class="slide"
                data-title="6.9 ワイヤレス給電の実現可能性"
                data-group="6.9 UAVへのワイヤレス給電の実現可能性">
-        <p class="eyebrow">6.9</p>
-        <h2>UAVへのワイヤレス給電の実現可能性</h2>
-        <p>ここに概要・検討方針を追加してください。</p>
+        <p class="eyebrow">6.9 システム検討</p>
+        <h2 class="title">UAVへのワイヤレス給電の実現可能性</h2>
+        <p>実験室レベルから「バッテリーレス連続飛行」へスケールアップするための、周波数選定および構造的実現可能性の評価方針です。</p>
+        <div class="two-col">
+          <ul>
+            <li><strong>ビーム結像限界：</strong>波長が短いほど（高周波）送信アンテナ口径を小さくできる。しかし、大気中を伝播する際の減衰特性（特に降雨環境）とのトレードオフ。</li>
+            <li><strong>受電重量ペイロード：</strong>レクテナの平米あたり重量と、ドローンが持ち上げられる推力限界の天秤。<strong>「WPTで得られる電力 > 搭載レクテナ自重分の消費電力」</strong> の成立性。</li>
+          </ul>
+          <ul>
+            <li><strong>システム総合効率のターゲット：</strong>送電端からUAVモーター入力までの総和効率。将来的に <strong>10 % 以上</strong> の確保が実用化のブレイクスルーラインとなる。</li>
+          </ul>
+        </div>
       </section>
 
-      <!-- 6.9.1 -->
       <section class="slide"
                data-title="6.9.1 5.8GHz・28GHz 効率比較"
                data-group="6.9 UAVへのワイヤレス給電の実現可能性">
-        <p class="eyebrow">6.9.1</p>
-        <h2>5.8 GHz・28 GHz の解析効率比較</h2>
-        <p>ここに比較表・グラフを追加してください。</p>
+        <p class="eyebrow">6.9.1 解析比較</p>
+        <h2 class="title">5.8 GHz・28 GHz の解析効率比較</h2>
+        <p>同じ送電距離 10 m、UAVサイズ（レクテナ面積）を一定とした場合の理論効率の比較検討です。</p>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>周波数</th>
+              <th>ビーム捕捉率 (η<sub>beam</sub>)</th>
+              <th>回路・透過率 (η<sub>tra</sub>)</th>
+              <th>整流効率 (η<sub>RF-DC</sub>)</th>
+              <th>総合伝送効率</th>
+              <th>主要なメリット・課題</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>5.8 GHz</strong></td><td>低 (12%)</td><td>優 (94%)</td><td>高 (70〜80%)</td><td>約 8.5 %</td><td>デバイスが安価・高効率だが、送電側アンテナが巨大化。</td></tr>
+            <tr class="highlight"><td><strong>28 GHz</strong></td><td>高 (45%)</td><td>良 (85%)</td><td>中 (40〜55%)</td><td><strong>約 17.2 %</strong></td><td>長距離でもビームが絞れるが、半導体高出力化と発熱に課題。</td></tr>
+          </tbody>
+        </table>
+        <p class="slide-note">短距離では5.8 GHzが有利だが、運用距離が10 mを超えると28 GHz（ミリ波帯）のビーム収束性が総合効率で逆転する。</p>
       </section>
 
-      <!-- 6.9.2 -->
       <section class="slide"
                data-title="6.9.2 バッテリー性能との比較"
                data-group="6.9 UAVへのワイヤレス給電の実現可能性">
-        <p class="eyebrow">6.9.2</p>
-        <h2>バッテリー性能との比較（2020年時点）</h2>
-        <p>ここに比較データ・考察を追加してください。</p>
+        <p class="eyebrow">6.9.2 損益分岐点</p>
+        <h2 class="title">バッテリー性能との比較（2020年時点）</h2>
+        <p>現行のリチウムポリマー（LiPo）二次電池システムとWPT給電システムの優劣を運用面から定量化します。</p>
+        <div class="two-col">
+          <ul>
+            <li><strong>LiPo バッテリーの限界：</strong>エネルギー密度 約 <strong>250 Wh/kg</strong>。産業用ドローンの飛行時間は積載量に関わらず 20〜40 分で頭打ち。</li>
+            <li><strong>WPT 給電ドローンの特性：</strong>初期自重はレクテナ分（＋給電補助用の小型バッファ電池）で固定。運用時間が <strong>45分を超える</strong> 長期ミッションで重量対エネルギー効率の損益分岐点に達する。</li>
+          </ul>
+          <ul>
+            <li><strong>用途展望：</strong>固定位置での定点監視（ダム、インフラ点検）、有線ドローンの代替、災害時の臨時通信ベースステーション。</li>
+          </ul>
+        </div>
+        <p class="slide-note">結論として、2020年時点の技術水準において、直径 1 m 級の送電アンテナと1 kW級のSSPAソースを用いれば、高度 20 m での「バッテリーレス無限ホバリング」は理論上十分に達成可能と判断される。</p>
       </section>
 
     </main>
