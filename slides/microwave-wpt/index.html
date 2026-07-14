@@ -582,8 +582,8 @@
       </section>
 
       <section class="slide"
-               data-title="6.8.2 UAV制御"
-               data-group="6.8 飛行デモンストレーション実験">
+      data-title="6.8.2 UAV制御"
+      data-group="6.8 飛行デモンストレーション実験">
         <p class="eyebrow">6.8.2 UAV制御</p>
         <h2 class="title">PI・PID制御の導入</h2>
         <div class="two-col">
@@ -601,26 +601,31 @@
           <li>
             <div class="image-container">
               <img src="../../images/slide_site13.png"
-                   style="max-width:85%; max-height:400px; border-radius:8px; box-shadow:0 4px 24px rgba(23,32,38,0.14);" />
+                    style="max-width:85%; max-height:400px; border-radius:8px; box-shadow:0 4px 24px rgba(23,32,38,0.14);" />
               <p class="image-caption">図 6-18(a)：x 方向誤差の確率分布（実線＝IFT controller、破線＝Proposed PID）</p>
             </div>
           </li>
           <li>
             <div class="image-container">
               <img src="../../images/slide_site14.png"
-                   style="max-width:85%; max-height:400px; border-radius:8px; box-shadow:0 4px 24px rgba(23,32,38,0.14);" />
+                    style="max-width:85%; max-height:400px; border-radius:8px; box-shadow:0 4px 24px rgba(23,32,38,0.14);" />
               <p class="image-caption">図 6-18(b)：y 方向誤差の確率分布</p>
             </div>
           </li>
           <li>
             <div class="image-container">
               <img src="../../images/slide_site15.png"
-                   style="max-width:85%; max-height:400px; border-radius:8px; box-shadow:0 4px 24px rgba(23,32,38,0.14);" />
+                    style="max-width:85%; max-height:400px; border-radius:8px; box-shadow:0 4px 24px rgba(23,32,38,0.14);" />
               <p class="image-caption">図 6-18(c)：z 方向誤差の確率分布</p>
             </div>
-
           </li>
         </ul>
+        <div class="slide-note" style="margin-top:16px;">
+          <strong>注釈：PI制御 / PID制御</strong><br>
+          PI制御は、目標値との偏差に比例した操作量を与える<strong>比例（P）</strong>動作に加え、偏差の時間積分に応じた操作量を与える<strong>積分（I）</strong>動作を組み合わせた制御方式。定常偏差（オフセット）を解消できるのが特徴。<br>
+          PID制御はこれに、偏差の変化率（時間微分）に応じた操作量を与える<strong>微分（D）</strong>動作を加えたもので、外乱や急激な変化に対する応答性・安定性が向上する。本実験では、比例制御のみ（P制御）から積分・微分動作を加えることで、外乱に強く定常誤差の少ない飛行制御を実現している。<br>
+          詳しい情報は一旦省く。
+        </div>
       </section>
 
       <section class="slide"
@@ -639,38 +644,59 @@
             <li><strong>比較条件：</strong>位相制御なし vs 位相制御あり。出力電力・送電電効率・連続給電時間を検討。</li>
           </ul>
         </div>
-        <p class="slide-note" style="margin-top:16px;">図 6-19：(a) ドローン底部の4アレーアンテナ、(b) 4素子整流回路基板。</p>
+        <div class="image-container">
+          <img src="../../images/slide_site16.png"
+                style="max-width:85%; max-height:400px; border-radius:8px; box-shadow:0 4px 24px rgba(23,32,38,0.14);" />
+          <p class="image-caption">図 6-19：(a) ドローン底部の4アレーアンテナ、(b) 4素子整流回路基板。</p>
+        </div>
       </section>
 
       <section class="slide"
-               data-title="6.8.3 飛行デモ実験結果"
-               data-group="6.8 飛行デモンストレーション実験">
+      data-title="6.8.3 飛行デモ実験結果"
+      data-group="6.8 飛行デモンストレーション実験">
         <p class="eyebrow">6.8.3 実験結果</p>
         <h2 class="title">飛行デモンストレーション実験結果</h2>
         <p style="font-size: 0.85rem; color: var(--muted); margin-bottom: 6px;">
-          図 6-20〜22 に位相制御の有無による x, y 方向誤差と出力電力の時間推移を示す。飛行時間 16–64 s では x, y 誤差は <strong>±0.2 m 以下</strong>に抑えられた（位相制御の有無にかかわらず）。
+        図 6-20〜22 に位相制御の有無による x, y 方向誤差と出力電力の時間推移を示す。飛行時間 16–64 s では、位相制御の有無にかかわらず x, y 方向の誤差は <strong>±0.2 m 以下</strong>、高度誤差も約 ±0.2 m に抑えられた。
         </p>
         <ul>
-          <li>0–16 s、64–80 s で誤差が大きくなるのは、離着陸時のリアルタイム制御開始・終了によるもの。</li>
-          <li>電力が検出されない箇所は、マイコンの検出限界 <strong>−40 dBm</strong> と仮定。</li>
+          <li>0–16 s（離陸時）および 64–80 s（着陸時）に誤差が大きくなるのは、リアルタイム制御の開始・終了にともない飛行が不安定になるため。</li>
+          <li>電力が検出されていない箇所は、マイコンの検出限界である <strong>−40 dBm</strong> と仮定。</li>
         </ul>
         <table class="data-table" style="margin-top:16px;">
-          <thead>
-            <tr>
-              <th>評価項目</th>
-              <th>位相制御なし</th>
-              <th>位相制御あり</th>
-              <th>改善比</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td>平均出力電力</td><td>−4.06 dBm</td><td>1.42 dBm</td><td><strong>約 2 倍</strong></td></tr>
-            <tr><td>連続給電時間</td><td>—</td><td>—</td><td><strong>約 9 倍</strong></td></tr>
-            <tr><td>最大出力電力</td><td>基準</td><td>—</td><td><strong>1.02 倍</strong></td></tr>
-            <tr><td>最大送受電効率</td><td>基準</td><td>—</td><td><strong>約 1.07 倍</strong></td></tr>
-          </tbody>
+        <thead>
+          <tr>
+            <th>評価項目</th>
+            <th>位相制御なし</th>
+            <th>位相制御あり</th>
+            <th>改善比</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>平均出力電力</td><td>−4.06 dBm</td><td>1.42 dBm</td><td><strong>約 2 倍</strong></td></tr>
+          <tr><td>連続給電時間</td><td>5.54 s</td><td>48.75 s</td><td><strong>約 9 倍</strong></td></tr>
+          <tr><td>最大出力電力</td><td>6.77 dBm (基準)</td><td>7.09 dBm</td><td><strong>1.02 倍</strong></td></tr>
+          <tr><td>最大送受電効率</td><td>0.125 % (基準)</td><td>0.135 %</td><td><strong>約 1.07 倍</strong></td></tr>
+        </tbody>
         </table>
-        <p class="slide-note" style="margin-top:16px;">28 GHz・高度 1.2 m の給電において最も長い連続給電に成功。菅沼らの実験より安定した長時間 DC 出力とより長距離送受電効率を達成した（表 6-7、図 6-22 参照）。</p>
+        <p class="slide-note" style="margin-top:16px;">
+          周波数 28 GHz・高度 1.2 m の給電において最も長い連続給電に成功。先行研究（菅沼の実験）の課題だった受電面積やUAV制御（PID制御の導入）を改善したことで、より安定した長時間の DC 出力と高い送受電効率を達成した（表 6-7 参照）。
+        </p>
+        <div class="image-container">
+          <img src="../../images/slide_site17.png"
+                style="max-width:85%; max-height:400px; border-radius:8px; box-shadow:0 4px 24px rgba(23,32,38,0.14);" />
+          <p class="image-caption">図 6-20： x,y方向の誤差と高度の飛行ログ(位相制御なし)</p>
+        </div>
+        <div class="image-container">
+          <img src="../../images/slide_site18.png"
+                style="max-width:85%; max-height:400px; border-radius:8px; box-shadow:0 4px 24px rgba(23,32,38,0.14);" />
+          <p class="image-caption">図 6-21： x,y方向の誤差と高度の飛行ログ(位相制御あり)</p>
+        </div>
+        <div class="image-container">
+          <img src="../../images/slide_site19.png"
+                style="max-width:85%; max-height:400px; border-radius:8px; box-shadow:0 4px 24px rgba(23,32,38,0.14);" />
+          <p class="image-caption">図 6-22： 出力電力の飛行時間推移</p>
+        </div>
       </section>
 
       <section class="slide"
