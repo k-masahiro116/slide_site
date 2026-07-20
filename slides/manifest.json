@@ -27,6 +27,13 @@
       "eyebrow": "Lecture",
       "description": "送受電効率の解析式・飛行デモ実験・UAVへのワイヤレス給電の実現可能性",
       "href": "slides/microwave-wpt/"
+    },
+    {
+      "id": "content_template",
+      "title": "Content Template",
+      "eyebrow": "Template",
+      "description": "Content Template",
+      "href": "slides/content_template/"
     }
   ]
 }

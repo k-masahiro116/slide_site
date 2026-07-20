@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="企画設計テンプレート（5W1H＋深掘り）" />
+    <title>企画設計テンプレート</title>
+    <link rel="stylesheet" href="../../styles.css" />
+    <style>
+      /* ── 記入欄カード ── */
+      .fill-card {
+        margin-top: 16px;
+        padding: 14px 16px;
+        border: 1px dashed var(--line);
+        border-radius: 8px;
+        background: rgba(15, 118, 110, 0.03);
+      }
+      .fill-label {
+        margin: 0 0 4px;
+        color: var(--accent-strong);
+        font-size: 0.78rem;
+        font-weight: 800;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+      .fill-hint {
+        margin: 0 0 8px;
+        color: var(--muted);
+        font-size: 0.8rem;
+        line-height: 1.5;
+      }
+      .fill-editable {
+        min-height: 46px;
+        padding: 9px 11px;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        background: var(--panel);
+        color: var(--ink);
+        font-size: 0.95rem;
+        line-height: 1.65;
+        white-space: pre-wrap;
+        outline: none;
+      }
+      .fill-editable:empty::before {
+        content: attr(data-placeholder);
+        color: rgba(88, 100, 111, 0.5);
+      }
+      .fill-editable:focus {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.12);
+      }
+      .fill-grid-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+      .slide-toolbar {
+        position: absolute;
+        top: clamp(16px, 3vw, 40px);
+        right: clamp(16px, 3vw, 40px);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .save-status {
+        color: var(--muted);
+        font-size: 0.72rem;
+        font-weight: 700;
+        opacity: 0;
+        transition: opacity 300ms ease-out;
+      }
+      .save-status.show {
+        opacity: 1;
+      }
+      .reset-slide-btn {
+        padding: 5px 11px;
+        border: 1px solid rgba(23, 32, 38, 0.16);
+        border-radius: 999px;
+        color: var(--muted);
+        background: rgba(255, 250, 241, 0.7);
+        font-size: 0.72rem;
+        font-weight: 700;
+        cursor: pointer;
+      }
+      .reset-slide-btn:hover {
+        color: var(--ink);
+        border-color: var(--ink);
+      }
+      .slide {
+        position: relative;
+      }
+      .header-meta {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin-top: 30px;
+        max-width: 760px;
+      }
+      .summary-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        font-size: 0.9rem;
+      }
+      .summary-table th {
+        padding: 8px 12px;
+        border-bottom: 2px solid var(--accent);
+        color: var(--accent-strong);
+        text-align: left;
+        font-size: 0.78rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+      .summary-table td {
+        padding: 10px 12px;
+        border-bottom: 1px solid var(--line);
+        vertical-align: top;
+      }
+      .summary-table td:first-child {
+        width: 130px;
+        color: var(--accent-strong);
+        font-weight: 800;
+      }
+    </style>
+  </head>
+  <body class="deck-page">
+    <a class="back-link" href="../../">← スライド一覧</a>
+
+    <aside class="toc" aria-label="スライド目次">
+      <p class="toc-title">目次</p>
+      <ol class="toc-list"></ol>
+    </aside>
+
+    <main class="deck" aria-live="polite">
+
+      <!-- ───────── タイトル ───────── -->
+      <section class="slide title-slide"
+               data-title="企画設計テンプレート"
+               data-group="0. 企画概要">
+        <p class="eyebrow">企画設計テンプレート</p>
+        <h1 class="title">企画書 / 議論まとめテンプレート</h1>
+        <p class="lead">5W1H でヌケモレなく整理し、多角的な視点で深掘りするための共有テンプレートです。各スライドの点線枠に直接書き込んで使ってください（入力内容は自動でブラウザに保存されます）。</p>
+        <div class="header-meta">
+          <div class="fill-card">
+            <p class="fill-label">企画名</p>
+            <div class="fill-editable" contenteditable="true" data-key="meta_title" data-placeholder="例）〇〇部 交流企画"></div>
+          </div>
+          <div class="fill-card">
+            <p class="fill-label">作成日 / 作成者</p>
+            <div class="fill-editable" contenteditable="true" data-key="meta_author" data-placeholder="例）2026/07/20　作成：〇〇"></div>
+          </div>
+        </div>
+        <p class="slide-note">使い方：①各項目の記入欄に議論内容を書き込む　②空欄でも下書きのまま共有してOK　③最後の「まとめ」で決定事項とネクストアクションを整理する。</p>
+      </section>
+
+      <!-- ───────── Why ───────── -->
+      <section class="slide"
+               data-title="Why｜目的・ゴール"
+               data-group="1. 企画基本設計（5W1H）">
+        <p class="eyebrow">1. 企画基本設計（5W1H） - Why</p>
+        <h2 class="title">Why｜目的・ゴール</h2>
+        <p class="fill-hint">なぜやるのか、参加者がどう変わるかを言語化します。</p>
+
+        <div class="fill-card">
+          <p class="fill-label">背景・課題感</p>
+          <p class="fill-hint">なぜ今この企画が必要なのか（現状の課題・きっかけ）</p>
+          <div class="fill-editable" contenteditable="true" data-key="why_background" data-placeholder="ここに入力…"></div>
+        </div>
+        <div class="fill-card">
+          <p class="fill-label">ゴール状態</p>
+          <p class="fill-hint">参加者・組織が企画を通じてどう変わってほしいか</p>
+          <div class="fill-editable" contenteditable="true" data-key="why_goal" data-placeholder="ここに入力…"></div>
+        </div>
+        <div class="fill-card">
+          <p class="fill-label">達成の指標</p>
+          <p class="fill-hint">成功したと言える状態（定性・定量どちらでも）</p>
+          <div class="fill-editable" contenteditable="true" data-key="why_metric" data-placeholder="ここに入力…"></div>
+        </div>
+      </section>
+
+      <!-- ───────── What ───────── -->
+      <section class="slide"
+               data-title="What｜実施内容"
+               data-group="1. 企画基本設計（5W1H）">
+        <p class="eyebrow">1. 企画基本設計（5W1H） - What</p>
+        <h2 class="title">What｜実施内容</h2>
+        <p class="fill-hint">具体的に何をするのかを整理します。</p>
+
+        <div class="fill-card">
+          <p class="fill-label">インタビューテーマ・切り口</p>
+          <div class="fill-editable" contenteditable="true" data-key="what_theme" data-placeholder="ここに入力…"></div>
+        </div>
+        <div class="fill-card">
+          <p class="fill-label">演出・コンテンツ（フック）</p>
+          <p class="fill-hint">参加したくなる仕掛け、話題性のある要素</p>
+          <div class="fill-editable" contenteditable="true" data-key="what_content" data-placeholder="ここに入力…"></div>
+        </div>
+        <div class="fill-card">
+          <p class="fill-label">具体的な進行内容</p>
+          <p class="fill-hint">当日、何をどの順番で行うか（箇条書きでOK）</p>
+          <div class="fill-editable" contenteditable="true" data-key="what_flow" data-placeholder="ここに入力…"></div>
+        </div>
+      </section>
+
+      <!-- ───────── Who ───────── -->
+      <section class="slide"
+               data-title="Who｜ターゲット・関係者"
+               data-group="1. 企画基本設計（5W1H）">
+        <p class="eyebrow">1. 企画基本設計（5W1H） - Who</p>
+        <h2 class="title">Who｜ターゲット・関係者</h2>
+        <p class="fill-hint">対象者、登壇者、運営メンバーの役割を整理します。</p>
+
+        <div class="fill-card">
+          <p class="fill-label">対象者（参加してほしい人）</p>
+          <div class="fill-editable" contenteditable="true" data-key="who_target" data-placeholder="ここに入力…"></div>
+        </div>
+        <div class="fill-card">
+          <p class="fill-label">登壇者・出演者</p>
+          <div class="fill-editable" contenteditable="true" data-key="who_speakers" data-placeholder="ここに入力…"></div>
+        </div>
+        <div class="fill-card">
+          <p class="fill-label">運営メンバーと役割分担</p>
+          <p class="fill-hint">誰が何を担当するか（司会・撮影・機材・当日対応 等）</p>
+          <div class="fill-editable" contenteditable="true" data-key="who_roles" data-placeholder="ここに入力…"></div>
+        </div>
+      </section>
+
+      <!-- ───────── When ───────── -->
+      <section class="slide"
+               data-title="When｜スケジュール"
+               data-group="1. 企画基本設計（5W1H）">
+        <p class="eyebrow">1. 企画基本設計（5W1H） - When</p>
+        <h2 class="title">When｜スケジュール</h2>
+        <p class="fill-hint">当日のタイムラインと事前準備の工程を整理します。</p>
+
+        <div class="fill-card">
+          <p class="fill-label">当日のタイムライン</p>
+          <div class="fill-editable" contenteditable="true" data-key="when_timeline" data-placeholder="例）13:00 受付／13:15 オープニング／…"></div>
+        </div>
+        <div class="fill-card">
+          <p class="fill-label">事前準備の工程</p>
+          <p class="fill-hint">いつまでに何を終わらせるか（逆算スケジュール）</p>
+          <div class="fill-editable" contenteditable="true" data-key="when_prep" data-placeholder="ここに入力…"></div>
+        </div>
+        <div class="fill-card">
+          <p class="fill-label">重要な締切・マイルストーン</p>
+          <div class="fill-editable" contenteditable="true" data-key="when_deadline" data-placeholder="ここに入力…"></div>
+        </div>
+      </section>
+
+      <!-- ───────── Where ───────── -->
+      <section class="slide"
+               data-title="Where｜開催形式・場所"
+               data-group="1. 企画基本設計（5W1H）">
+        <p class="eyebrow">1. 企画基本設計（5W1H） - Where</p>
+        <h2 class="title">Where｜開催形式・場所</h2>
+        <p class="fill-hint">実施環境と共有ツールを整理します。</p>
+
+        <div class="fill-card">
+          <p class="fill-label">実施環境</p>
+          <p class="fill-hint">リアル／オンライン／ハイブリッドのいずれか、その理由</p>
+          <div class="fill-editable" contenteditable="true" data-key="where_format" data-placeholder="ここに入力…"></div>
+        </div>
+        <div class="fill-card">
+          <p class="fill-label">会場・配信環境の詳細</p>
+          <div class="fill-editable" contenteditable="true" data-key="where_venue" data-placeholder="ここに入力…"></div>
+        </div>
+        <div class="fill-card">
+          <p class="fill-label">共有ツール</p>
+          <p class="fill-hint">資料・録画・チャット・議事録などの共有手段</p>
+          <div class="fill-editable" contenteditable="true" data-key="where_tools" data-placeholder="ここに入力…"></div>
+        </div>
+      </section>
+
+      <!-- ───────── How ───────── -->
+      <section class="slide"
+               data-title="How｜運用・手法"
+               data-group="1. 企画基本設計（5W1H）">
+        <p class="eyebrow">1. 企画基本設計（5W1H） - How</p>
+        <h2 class="title">How｜運用・手法</h2>
+        <p class="fill-hint">巻き込みの工夫や運用手法を整理します。</p>
+
+        <div class="fill-card">
+          <p class="fill-label">巻き込みの工夫</p>
+          <p class="fill-hint">当日の盛り上げ方、参加者の主体性を引き出す仕掛け</p>
+          <div class="fill-editable" contenteditable="true" data-key="how_engage" data-placeholder="ここに入力…"></div>
+        </div>
+        <div class="fill-card">
+          <p class="fill-label">事前アンケート・ツールの活用</p>
+          <div class="fill-editable" contenteditable="true" data-key="how_survey" data-placeholder="ここに入力…"></div>
+        </div>
+        <div class="fill-card">
+          <p class="fill-label">進行マニュアル・役割の伝達方法</p>
+          <div class="fill-editable" contenteditable="true" data-key="how_manual" data-placeholder="ここに入力…"></div>
+        </div>
+      </section>
+
+      <!-- ───────── 視座チェンジ ───────── -->
+      <section class="slide"
+               data-title="視座チェンジ"
+               data-group="2. 企画の深掘り・多角化アプローチ">
+        <p class="eyebrow">2. 企画の深掘り・多角化アプローチ</p>
+        <h2 class="title">視座チェンジ</h2>
+        <p class="fill-hint">立場が違う人それぞれの視点から、企画がどう見えるかを検討します。</p>
+
+        <div class="fill-grid-2">
+          <div class="fill-card">
+            <p class="fill-label">若手社員視点</p>
+            <p class="fill-hint">「自分事」と感じてもらうための仕掛け</p>
+            <div class="fill-editable" contenteditable="true" data-key="persp_junior" data-placeholder="ここに入力…"></div>
+          </div>
+          <div class="fill-card">
+            <p class="fill-label">部長陣視点</p>
+            <p class="fill-hint">「協力したい」と思ってもらうための仕掛け</p>
+            <div class="fill-editable" contenteditable="true" data-key="persp_senior" data-placeholder="ここに入力…"></div>
+          </div>
+        </div>
+        <div class="fill-card">
+          <p class="fill-label">温度差を埋める工夫</p>
+          <p class="fill-hint">両者の間にギャップがある場合、どう橋渡しするか</p>
+          <div class="fill-editable" contenteditable="true" data-key="persp_bridge" data-placeholder="ここに入力…"></div>
+        </div>
+      </section>
+
+      <!-- ───────── 時間軸 ───────── -->
+      <section class="slide"
+               data-title="時間軸"
+               data-group="2. 企画の深掘り・多角化アプローチ">
+        <p class="eyebrow">2. 企画の深掘り・多角化アプローチ</p>
+        <h2 class="title">時間軸</h2>
+        <p class="fill-hint">イベント前〜後までの流れで、体験がどうつながるかを整理します。</p>
+
+        <div class="fill-card">
+          <p class="fill-label">イベント前（告知・巻き込み）</p>
+          <div class="fill-editable" contenteditable="true" data-key="time_before" data-placeholder="ここに入力…"></div>
+        </div>
+        <div class="fill-card">
+          <p class="fill-label">イベント当日</p>
+          <div class="fill-editable" contenteditable="true" data-key="time_during" data-placeholder="ここに入力…"></div>
+        </div>
+        <div class="fill-card">
+          <p class="fill-label">イベント後（日常への波及）</p>
+          <p class="fill-hint">熱量をどう継続させるか、その後のアクション</p>
+          <div class="fill-editable" contenteditable="true" data-key="time_after" data-placeholder="ここに入力…"></div>
+        </div>
+      </section>
+
+      <!-- ───────── リスク対策 ───────── -->
+      <section class="slide"
+               data-title="リスク対策"
+               data-group="2. 企画の深掘り・多角化アプローチ">
+        <p class="eyebrow">2. 企画の深掘り・多角化アプローチ</p>
+        <h2 class="title">リスク対策</h2>
+        <p class="fill-hint">失敗シナリオを想定し、代替案をあらかじめ用意します。</p>
+
+        <div class="fill-card">
+          <p class="fill-label">想定される失敗シナリオ</p>
+          <p class="fill-hint">例）盛り上がらない、準備不足、参加率が低い 等</p>
+          <div class="fill-editable" contenteditable="true" data-key="risk_scenario" data-placeholder="ここに入力…"></div>
+        </div>
+        <div class="fill-card">
+          <p class="fill-label">発生要因</p>
+          <div class="fill-editable" contenteditable="true" data-key="risk_cause" data-placeholder="ここに入力…"></div>
+        </div>
+        <div class="fill-card">
+          <p class="fill-label">代替案（Plan B）</p>
+          <div class="fill-editable" contenteditable="true" data-key="risk_planb" data-placeholder="ここに入力…"></div>
+        </div>
+      </section>
+
+      <!-- ───────── ROI ───────── -->
+      <section class="slide"
+               data-title="投資対効果（ROI）"
+               data-group="2. 企画の深掘り・多角化アプローチ">
+        <p class="eyebrow">2. 企画の深掘り・多角化アプローチ</p>
+        <h2 class="title">投資対効果（ROI）</h2>
+        <p class="fill-hint">運用工数を抑えつつ、最大の効果を生む工夫を検討します。</p>
+
+        <div class="fill-card">
+          <p class="fill-label">かかる工数・コスト</p>
+          <div class="fill-editable" contenteditable="true" data-key="roi_cost" data-placeholder="ここに入力…"></div>
+        </div>
+        <div class="fill-card">
+          <p class="fill-label">想定される効果</p>
+          <p class="fill-hint">士気向上・関係構築など、得られるリターン</p>
+          <div class="fill-editable" contenteditable="true" data-key="roi_effect" data-placeholder="ここに入力…"></div>
+        </div>
+        <div class="fill-card">
+          <p class="fill-label">工数を抑える工夫</p>
+          <div class="fill-editable" contenteditable="true" data-key="roi_efficiency" data-placeholder="ここに入力…"></div>
+        </div>
+      </section>
+
+      <!-- ───────── まとめ ───────── -->
+      <section class="slide"
+               data-title="まとめ・ネクストアクション"
+               data-group="3. まとめ">
+        <p class="eyebrow">3. まとめ</p>
+        <h2 class="title">まとめ・ネクストアクション</h2>
+        <p class="fill-hint">議論の結論と、次にやることを整理します。</p>
+
+        <div class="fill-card">
+          <p class="fill-label">決定事項サマリー</p>
+          <div class="fill-editable" contenteditable="true" data-key="summary_decided" data-placeholder="ここに入力…"></div>
+        </div>
+        <div class="fill-card">
+          <p class="fill-label">未決事項・持ち越しポイント</p>
+          <div class="fill-editable" contenteditable="true" data-key="summary_pending" data-placeholder="ここに入力…"></div>
+        </div>
+
+        <table class="summary-table">
+          <thead>
+            <tr>
+              <th>アクション</th>
+              <th>担当</th>
+              <th>期限</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><div class="fill-editable" contenteditable="true" data-key="action1_task" data-placeholder="やること"></div></td>
+              <td><div class="fill-editable" contenteditable="true" data-key="action1_owner" data-placeholder="担当者"></div></td>
+              <td><div class="fill-editable" contenteditable="true" data-key="action1_due" data-placeholder="〆切"></div></td>
+            </tr>
+            <tr>
+              <td><div class="fill-editable" contenteditable="true" data-key="action2_task" data-placeholder="やること"></div></td>
+              <td><div class="fill-editable" contenteditable="true" data-key="action2_owner" data-placeholder="担当者"></div></td>
+              <td><div class="fill-editable" contenteditable="true" data-key="action2_due" data-placeholder="〆切"></div></td>
+            </tr>
+            <tr>
+              <td><div class="fill-editable" contenteditable="true" data-key="action3_task" data-placeholder="やること"></div></td>
+              <td><div class="fill-editable" contenteditable="true" data-key="action3_owner" data-placeholder="担当者"></div></td>
+              <td><div class="fill-editable" contenteditable="true" data-key="action3_due" data-placeholder="〆切"></div></td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="slide-note">このテンプレートの入力内容はブラウザのローカルストレージに自動保存されます（このPC・このブラウザのみ）。チームで共有する際は、スクリーンショットまたはコピー＆ペーストで別ドキュメントに転記してください。</p>
+      </section>
+
+    </main>
+
+    <nav class="controls" aria-label="Slide controls">
+      <button class="control" type="button" data-action="prev" aria-label="Previous slide">‹</button>
+      <span class="counter" aria-label="Slide count">
+        <span id="current-slide">1</span>/<span id="total-slides">1</span>
+      </span>
+      <button class="control" type="button" data-action="next" aria-label="Next slide">›</button>
+    </nav>
+
+    <div class="progress" aria-hidden="true">
+      <div class="progress-bar"></div>
+    </div>
+
+    <script src="../../script.js"></script>
+    <script>
+      // ── 記入内容の自動保存（このブラウザ内のみ） ──
+      (function () {
+        var STORAGE_PREFIX = "content_template_v1:";
+        var fields = document.querySelectorAll(".fill-editable[data-key]");
+
+        fields.forEach(function (el) {
+          var key = STORAGE_PREFIX + el.dataset.key;
+          try {
+            var saved = window.localStorage.getItem(key);
+            if (saved) el.textContent = saved;
+          } catch (e) {
+            /* localStorage unavailable: skip restore */
+          }
+
+          var timer = null;
+          el.addEventListener("input", function () {
+            clearTimeout(timer);
+            timer = setTimeout(function () {
+              try {
+                window.localStorage.setItem(key, el.textContent);
+              } catch (e) {
+                /* ignore */
+              }
+            }, 400);
+          });
+        });
+      })();
+    </script>
+  </body>
+</html>
