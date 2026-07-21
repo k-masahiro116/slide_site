@@ -51,6 +51,64 @@
       .data-table tr:nth-child(even) td { background: rgba(15,118,110,0.05); }
       .data-table td:first-child { text-align: left; font-weight: 600; color: var(--ink); }
       .data-table .highlight td { background: rgba(180,83,9,0.10); color: var(--ink); font-weight: 700; }
+      .data-table thead th[colspan],
+      .data-table thead th[rowspan] {
+        vertical-align: middle;
+      }
+
+      /* ── 周波数比較表：グループ視認性 ── */
+      .freq-compare-table {
+        border-collapse: separate;
+        border-spacing: 0;
+        overflow: hidden;
+        border-radius: 8px;
+      }
+      .freq-compare-table th.freq-label {
+        background: var(--accent-strong);
+        min-width: 4.5rem;
+      }
+      .freq-compare-table th.freq-28 {
+        background: var(--accent);
+      }
+      .freq-compare-table th.freq-58 {
+        background: #5c6b75;
+      }
+      .freq-compare-table th.freq-28-group {
+        background: var(--accent);
+        font-size: 1.05em;
+        letter-spacing: 0.06em;
+        border-bottom: 2px solid rgba(255, 255, 255, 0.35);
+      }
+      .freq-compare-table th.freq-58-group {
+        background: #5c6b75;
+        font-size: 1.05em;
+        letter-spacing: 0.06em;
+        border-bottom: 2px solid rgba(255, 255, 255, 0.35);
+      }
+      .freq-compare-table th.freq-58-group,
+      .freq-compare-table th.freq-58,
+      .freq-compare-table td.freq-58 {
+        border-left: 3px solid rgba(23, 32, 38, 0.18);
+      }
+      .freq-compare-table td.freq-28 {
+        background: rgba(15, 118, 110, 0.07);
+        color: var(--ink);
+        font-weight: 600;
+      }
+      .freq-compare-table td.freq-58 {
+        background: rgba(92, 107, 117, 0.08);
+        color: var(--muted);
+      }
+      .freq-compare-table tr:nth-child(even) td.freq-28 {
+        background: rgba(15, 118, 110, 0.12);
+      }
+      .freq-compare-table tr:nth-child(even) td.freq-58 {
+        background: rgba(92, 107, 117, 0.14);
+      }
+      .freq-compare-table td.freq-28:nth-child(2) {
+        font-weight: 800;
+        color: var(--accent-strong);
+      }
 
       /* ── 効率分解バー ── */
       .eta-bar-wrap { margin-top: 28px; display: grid; gap: 10px; }
@@ -118,6 +176,173 @@
       .kp-card .kp-num { font-size: clamp(1.6rem, 4vw, 2.2rem); font-weight: 800; color: var(--accent); line-height: 1; }
       .kp-card .kp-unit { font-size: 0.8rem; font-weight: 700; color: var(--accent); }
       .kp-card .kp-desc { margin-top: 6px; font-size: 0.82rem; color: var(--muted); line-height: 1.45; }
+
+      /* ── ストーリーレイアウト（前提→結果） ── */
+      .story-lead {
+        margin: 20px 0 18px;
+        font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+        line-height: 1.55;
+        color: var(--ink);
+      }
+      .story-section-label {
+        margin: 0 0 8px;
+        font-size: 0.72rem;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--accent-strong);
+      }
+      .assume-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+        margin-bottom: 22px;
+      }
+      .assume-item {
+        padding: 12px 14px;
+        border-top: 3px solid var(--accent);
+        background: rgba(15, 118, 110, 0.06);
+      }
+      .assume-item .assume-k {
+        margin: 0 0 4px;
+        font-size: 0.72rem;
+        font-weight: 800;
+        color: var(--accent-strong);
+        letter-spacing: 0.04em;
+      }
+      .assume-item .assume-v {
+        margin: 0;
+        font-size: 0.88rem;
+        line-height: 1.45;
+        color: var(--ink);
+      }
+      .assume-item .assume-v strong {
+        font-size: 1.02rem;
+      }
+      .story-arrow-row {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        margin: 4px 0 18px;
+        padding: 10px 16px;
+        background: rgba(180, 83, 9, 0.08);
+        border-left: 4px solid #b45309;
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: var(--ink);
+      }
+      .story-arrow-row span { color: #b45309; }
+      .altitude-flow {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr auto 1fr;
+        gap: 8px;
+        align-items: stretch;
+      }
+      .altitude-step {
+        padding: 14px 16px;
+        border: 1px solid var(--line);
+        background: var(--panel);
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .altitude-step.is-start {
+        border-color: var(--accent);
+        background: rgba(15, 118, 110, 0.07);
+      }
+      .altitude-step .alt-h {
+        margin: 0;
+        font-size: 0.78rem;
+        font-weight: 800;
+        letter-spacing: 0.06em;
+        color: var(--muted);
+      }
+      .altitude-step .alt-eta {
+        margin: 0;
+        font-size: clamp(1.7rem, 3.5vw, 2.2rem);
+        font-weight: 800;
+        color: var(--accent);
+        line-height: 1;
+      }
+      .altitude-step .alt-eta small {
+        font-size: 0.7em;
+        font-weight: 700;
+      }
+      .altitude-step .alt-meta {
+        margin: 0;
+        font-size: 0.8rem;
+        color: var(--muted);
+        line-height: 1.4;
+      }
+      .altitude-step .alt-power {
+        margin-top: auto;
+        padding-top: 8px;
+        border-top: 1px dashed var(--line);
+        font-size: 0.88rem;
+        font-weight: 700;
+        color: var(--ink);
+      }
+      .altitude-step .alt-power em {
+        font-style: normal;
+        color: #b45309;
+      }
+      .flow-chevron {
+        display: flex;
+        align-items: center;
+        color: var(--muted);
+        font-size: 1.4rem;
+        font-weight: 700;
+        opacity: 0.55;
+      }
+      .step2-layout {
+        display: grid;
+        grid-template-columns: 1.15fr 1fr;
+        gap: 20px;
+        align-items: stretch;
+      }
+      .step2-layout .image-container {
+        margin: 0;
+      }
+      .step2-layout .image-container img {
+        max-width: 100%;
+        max-height: 340px;
+        width: auto;
+        border-radius: 8px;
+        box-shadow: 0 4px 24px rgba(23, 32, 38, 0.14);
+        display: block;
+      }
+      .step2-layout .image-caption {
+        margin-top: 8px;
+        font-size: 0.75rem;
+        line-height: 1.4;
+      }
+      .altitude-stack {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .altitude-stack .altitude-step {
+        flex: 1;
+        padding: 10px 14px;
+        gap: 4px;
+      }
+      .altitude-stack .altitude-step .alt-eta {
+        font-size: clamp(1.35rem, 2.8vw, 1.75rem);
+      }
+      .altitude-stack .altitude-step .alt-meta {
+        font-size: 0.75rem;
+      }
+      .altitude-stack .altitude-step .alt-power {
+        font-size: 0.82rem;
+        padding-top: 6px;
+      }
+      @media (max-width: 900px) {
+        .assume-grid { grid-template-columns: 1fr 1fr; }
+        .altitude-flow { grid-template-columns: 1fr; }
+        .flow-chevron { transform: rotate(90deg); justify-content: center; padding: 2px 0; }
+        .step2-layout { grid-template-columns: 1fr; }
+      }
 
     </style>
   </head>
@@ -700,110 +925,305 @@
       </section>
 
       <section class="slide"
-      data-title="6.9 ワイヤレス給電の実現可能性"
-      data-group="6.9 UAVへのワイヤレス給電の実現可能性">
+               data-title="6.9 ワイヤレス給電の実現可能性"
+               data-group="6.9 UAVへのワイヤレス給電の実現可能性">
         <p class="eyebrow">6.9 システム検討</p>
         <h2 class="title">UAVへのワイヤレス給電の実現可能性</h2>
         <p style="font-size: 0.85rem; color: var(--muted); margin-bottom: 12px;">
-          本章では、UAVへの28GHzMPTを、菅沼らの解析結果と先行研究で行われてきた5.8GHzWPT、現状のバッテリー性能と比較して実現可能性を論じる。<br>
-          本研究では、以下の2条件が満たされる場合に「28 GHz MPT（マイクロ波送電）が実現可能」と定義する。
+          本節では、UAVへの 28 GHz MPT を、<strong>菅沼らの解析結果</strong>・先行研究の <strong>5.8 GHz MPT</strong>・現状の<strong>バッテリー性能</strong>と比較して実現可能性を論じる。
         </p>
-
+        <p>以下の <strong>2条件</strong> を満たす場合に、28 GHz MPT が実現可能と定義する。</p>
         <ul>
           <li>
-            <strong>給電電力の担保（条件1）：</strong><br>
-            <strong>1 MW 以下の送電電力</strong>で、高度 50 m を飛行中の UAV の消費電力以上の DC 出力が得られること。
+            <strong>条件1（給電電力）：</strong>
+            <strong>1 MW 以下</strong>の送電電力で、高度 <strong>50 m</strong> を飛行中の UAV の消費電力以上の DC 出力が得られること。
           </li>
           <li>
-            <strong>軽量な電源システム（条件2）：</strong><br>
-            UAV に搭載する受電レクテナアレーおよび電力統合ユニットが、<strong>現状のバッテリーよりも軽量</strong>な電源となること。
+            <strong>条件2（軽量電源）：</strong>
+            受電レクテナ等の電源系が、<strong>現状のバッテリーよりも軽量</strong>であること。
           </li>
         </ul>
+        <p class="slide-note" style="margin-top:16px;">
+          以降の流れ：① AR.Drone 2.0 で 28 / 5.8 GHz を比較 → ② 4000 W 級 UAV へ拡張 → ③ 高度と必要送電電力 → ④ 高度 50 m での成立性 → ⑤ バッテリー重量比較。
+        </p>
       </section>
 
       <section class="slide"
-            data-title="6.9.1 5.8GHz・28GHz 効率比較"
-            data-group="6.9 UAVへのワイヤレス給電の実現可能性">
-        <p class="eyebrow">6.9.1 解析比較</p>
-        <h2 class="title">5.8 GHz・28 GHz の解析効率比較 (AR.Drone 2.0)</h2>
-        <p style="font-size: 0.85rem; color: var(--muted); margin-bottom: 12px;">
-        AR.Drone 2.0（底面 9 cm × 15 cm レクテナアレー想定）における高度別の最大解析効率 η<sub>A,max</sub> と、最適な送電ビームウエスト ω<sub>0</sub> の比較。
+               data-title="6.9.1 解析の前提条件"
+               data-group="6.9 UAVへのワイヤレス給電の実現可能性">
+        <p class="eyebrow">6.9.1 5.8 GHz・28 GHz の解析効率比較</p>
+        <h2 class="title">解析の前提条件（AR.Drone 2.0）</h2>
+        <p class="story-lead">
+          実験機体を例に、<strong>28 GHz MPT でどこまで飛べるか</strong>を見積もる。<br>
+          まず前提を固定し、高度を上げたときの η<sub>A,max</sub> と必要送電電力を追う。
         </p>
-        <table class="data-table">
-        <thead>
-          <tr>
-            <th>飛行高度 (z)</th>
-            <th>28 GHz 効率 (η<sub>A,max</sub>)</th>
-            <th>28 GHz ビームウエスト (ω<sub>0</sub>)</th>
-            <th>5.8 GHz 効率 (η<sub>A,max</sub>)</th>
-            <th>5.8 GHz ビームウエスト (ω<sub>0</sub>)</th>
-            <th>28 GHz の優位性 (倍率)</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>0.8 m</strong></td>
-            <td>12.0 %</td>
-            <td>5 cm</td>
-            <td>2.6 %</td>
-            <td>11 cm</td>
-            <td><strong>約 4.6 倍</strong> 優位</td>
-          </tr>
-          <tr>
-            <td><strong>5.0 m</strong></td>
-            <td>3.5 %</td>
-            <td>13 cm</td>
-            <td>0.45 %</td>
-            <td>29 cm</td>
-            <td><strong>約 7.7 倍</strong> 優位</td>
-          </tr>
-          <tr class="highlight">
-            <td><strong>10.0 m</strong></td>
-            <td>1.9 %</td>
-            <td>19 cm</td>
-            <td>0.25 %</td>
-            <td>41 cm</td>
-            <td><strong>約 7.6 倍</strong> 優位</td>
-          </tr>
-        </tbody>
+
+        <p class="story-section-label">Step 1 — 前提を固定する</p>
+        <div class="assume-grid">
+          <div class="assume-item">
+            <p class="assume-k">受電面</p>
+            <p class="assume-v">底面に<br><strong>9 cm × 15 cm</strong><br>レクテナアレー</p>
+          </div>
+          <div class="assume-item">
+            <p class="assume-k">飛行条件</p>
+            <p class="assume-v">送電アンテナ直上で<br><strong>完全停止</strong><br>正方形ビーム（ω<sub>0</sub>）</p>
+          </div>
+          <div class="assume-item">
+            <p class="assume-k">設計方針</p>
+            <p class="assume-v">ω<sub>0</sub> 上限 <strong>1 m</strong><br>距離 z ごとに<br>η<sub>A,max</sub> となる ω<sub>0</sub> を設計</p>
+          </div>
+          <div class="assume-item">
+            <p class="assume-k">固定効率</p>
+            <p class="assume-v">η<sub>cap,max</sub> 33 %<br>η<sub>tra</sub> 99 % · η<sub>RF-DC</sub> 55 %<br><small style="color:var(--muted);">大気減衰はほぼ無視</small></p>
+          </div>
+        </div>
+
+        <p class="story-section-label">Step 2 — 高度を上げると何が起きるか（図 6-23）</p>
+        <div class="story-arrow-row">
+          高度が上がる <span>→</span> η<sub>A,max</sub> が下がる <span>→</span> 必要送電電力が増える
+        </div>
+
+        <div class="step2-layout">
+          <div class="image-container">
+            <img src="../../images/slide_site20.png" alt="図 6-23 AR.Drone 2.0 の高度 0～10 m での 28 GHz MPT の解析効率 ηA,max" />
+            <p class="image-caption">図 6-23：AR.Drone 2.0 の高度 0～10 m での 28 GHz MPT の解析効率 η<sub>A,max</sub></p>
+          </div>
+          <div class="altitude-stack">
+            <div class="altitude-step is-start">
+              <p class="alt-h">高度 0.8 m　·　ω<sub>0</sub> = 5 cm</p>
+              <p class="alt-eta">12.0 <small>%</small></p>
+              <p class="alt-meta">本研究の飛行高度。η<sub>A,max</sub> が最も高い。</p>
+              <p class="alt-power">必要送電電力 <em>500 W</em>
+                <span style="font-weight:600;color:var(--muted);font-size:0.75rem;">（TWT 1 台）</span>
+              </p>
+            </div>
+            <div class="altitude-step">
+              <p class="alt-h">高度 5 m　·　ω<sub>0</sub> = 13 cm</p>
+              <p class="alt-eta">3.5 <small>%</small></p>
+              <p class="alt-meta">効率は約 1/3。ビームも広げる必要あり。</p>
+              <p class="alt-power">必要送電電力 <em>1715 W</em></p>
+            </div>
+            <div class="altitude-step">
+              <p class="alt-h">高度 10 m　·　ω<sub>0</sub> = 19 cm</p>
+              <p class="alt-eta">1.9 <small>%</small></p>
+              <p class="alt-meta">さらに効率低下。送電系の規模が拡大。</p>
+              <p class="alt-power">必要送電電力 <em>3157 W</em></p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide"
+               data-title="6.9.1 AR.Drone 周波数比較"
+               data-group="6.9 UAVへのワイヤレス給電の実現可能性">
+        <p class="eyebrow">6.9.1 5.8 GHz・28 GHz の解析効率比較</p>
+        <h2 class="title">AR.Drone 2.0：28 GHz と 5.8 GHz の比較</h2>
+        <p style="font-size: 0.85rem; color: var(--muted); margin-bottom: 12px;">
+          先行研究のレクテナを用いた 5.8 GHz MPT（図 6-24）と比較すると、η<sub>A,max</sub> は常に 28 GHz が優位。
+        </p>
+        <div class="image-container" style="margin-top:12px; margin-bottom:8px;">
+          <img src="../../images/slide_site21.png"
+               alt="図 6-24 AR.Drone 2.0 の高度 0～10 m での 5.8 GHz MPT の解析効率 ηA,max"
+               style="max-width:100%; max-height:320px; border-radius:8px; box-shadow:0 4px 24px rgba(23,32,38,0.14);" />
+          <p class="image-caption">図 6-24：AR.Drone 2.0 の高度 0～10 m での 5.8 GHz MPT の解析効率 η<sub>A,max</sub></p>
+        </div>
+        <table class="data-table freq-compare-table" style="margin-top:16px;">
+          <thead>
+            <tr>
+              <th class="freq-label" rowspan="2"></th>
+              <th class="freq-28-group" colspan="2">28 GHz</th>
+              <th class="freq-58-group" colspan="2">5.8 GHz</th>
+            </tr>
+            <tr>
+              <th class="freq-28">η<sub>A,max</sub></th>
+              <th class="freq-28">ω<sub>0</sub></th>
+              <th class="freq-58">η<sub>A,max</sub></th>
+              <th class="freq-58">ω<sub>0</sub></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>0.8 m</td>
+              <td class="freq-28">12.0 %</td>
+              <td class="freq-28">5 cm</td>
+              <td class="freq-58">2.6 %</td>
+              <td class="freq-58">11 cm</td>
+            </tr>
+            <tr>
+              <td>5 m</td>
+              <td class="freq-28">3.5 %</td>
+              <td class="freq-28">13 cm</td>
+              <td class="freq-58">0.45 %</td>
+              <td class="freq-58">29 cm</td>
+            </tr>
+            <tr>
+              <td>10 m</td>
+              <td class="freq-28">1.9 %</td>
+              <td class="freq-28">19 cm</td>
+              <td class="freq-58">0.25 %</td>
+              <td class="freq-58">41 cm</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="slide-note" style="margin-top:16px;">
+          表 6-8：代表高度での AR.Drone の 28 GHz / 5.8 GHz MPT 比較。0.8 m で約 <strong>4.6 倍</strong>、5 m で約 <strong>7.7 倍</strong>、10 m で約 <strong>7.6 倍</strong>、28 GHz が優位。
+        </p>
+      </section>
+
+      <section class="slide"
+               data-title="6.9.1 4000W級UAVの解析"
+               data-group="6.9 UAVへのワイヤレス給電の実現可能性">
+        <p class="eyebrow">6.9.1 5.8 GHz・28 GHz の解析効率比較</p>
+        <h2 class="title">4000 W 級回転翼 UAV への拡張</h2>
+        <p style="font-size: 0.85rem; color: var(--muted); margin-bottom: 12px;">
+          物流用途を想定し、消費電力 3000–4000 W・高度 20–50 m で飛行する回転翼 UAV を考える。
+          底面積 <strong>1.79 m²</strong> の 1/4 にレクテナを搭載すると、<strong>1辺 67 cm</strong> のアレーが搭載可能。
+        </p>
+        <div class="two-col" style="align-items: start; margin-top: 12px;">
+          <div class="image-container" style="margin-top:0;">
+            <img src="../../images/slide_site22.png"
+                 alt="図 6-25 4000 W 回転翼 UAV（DJI FlyCart 30）"
+                 style="max-width:100%; max-height:220px; border-radius:8px; box-shadow:0 4px 24px rgba(23,32,38,0.14);" />
+            <p class="image-caption">図 6-25：4000 W 回転翼 UAV（DJI FlyCart 30）[26]</p>
+          </div>
+          <div class="image-container" style="margin-top:0;">
+            <img src="../../images/slide_site23.png"
+                 alt="図 6-26 4000 W 級 UAV の 28 GHz MPT 解析効率 ηA,max"
+                 style="max-width:100%; max-height:220px; border-radius:8px; box-shadow:0 4px 24px rgba(23,32,38,0.14);" />
+            <p class="image-caption">図 6-26：4000 W 級 UAV の高度 20～100 m での 28 GHz MPT の η<sub>A,max</sub></p>
+          </div>
+        </div>
+        <table class="data-table" style="margin-top:14px;">
+          <thead>
+            <tr>
+              <th>飛行高度</th>
+              <th>η<sub>A,max</sub></th>
+              <th>ω<sub>0</sub></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>20 m</strong></td><td>15.7 %</td><td>26 cm</td></tr>
+            <tr class="highlight"><td><strong>50 m</strong></td><td>10.1 %</td><td>41 cm</td></tr>
+            <tr><td><strong>100 m</strong></td><td>6.2 %</td><td>58 cm</td></tr>
+          </tbody>
         </table>
         <p class="slide-note" style="margin-top:12px;">
-        <strong>4000 W級大型UAV（底面1.79 ㎡の1/4にレクテナ搭載）の場合：</strong>高度 50 m 以下で 28 GHz MPT を用いれば、η<sub>A,max</sub> は <strong>10 % 以上</strong>を確保可能（高度 100 m でも 6.2 %、ω<sub>0</sub> = 58cm）。
+          表 6-9：高度 <strong>50 m 以下</strong>で η<sub>A,max</sub> は <strong>10 % 以上</strong>（ω<sub>0</sub> ≤ 41 cm）。送電装置は可搬性に優れ、災害時の送電基地展開にも適する。
         </p>
       </section>
 
       <section class="slide"
-            data-title="6.9.2 バッテリー性能との比較"
-            data-group="6.9 UAVへのワイヤレス給電の実現可能性">
-        <p class="eyebrow">6.9.2 システム評価</p>
-        <h2 class="title">送電電力および重量性能の評価（2020年時点）</h2>
+               data-title="6.9.1 必要送電電力の比較"
+               data-group="6.9 UAVへのワイヤレス給電の実現可能性">
+        <p class="eyebrow">6.9.1 5.8 GHz・28 GHz の解析効率比較</p>
+        <h2 class="title">飛行高度と必要送電電力（図 6-27・6-28）</h2>
         <p style="font-size: 0.85rem; color: var(--muted); margin-bottom: 12px;">
-        高度 50 m（送電アンテナ直径 1 m）における受電 DC 電力および、レクテナとバッテリーの重量比比較。
+          最適ビームウエストで送電系を設計した場合の、消費電力を得るのに必要な送電電力を 28 GHz / 5.8 GHz で比較する。
         </p>
-        <div class="two-col">
-        <ul>
-          <li>
-            <strong>高度 50 m での給電成立性：</strong><br>
-            5.8 GHz では 1 MW の送電電力を供給しても消費電力を賄えない。一方、<strong>28 GHz では 200 kW の送電電力</strong>で 4000 W 級 UAV の消費電力をクリア可能。1 MW 送電であれば、消費電力の約 10 倍を得られるため充電も可能となる。
-          </li>
-          <li>
-            <strong>機体重量に占める電源の割合：</strong><br>
-            通常、バッテリー重量は機体全体の約 30 %（0.3倍）を占める。本研究の窒化ケイ素（シリコン）製ダイオードを用いたレクテナは 90 g 以上の機体でバッテリーと同等重量になってしまう。
-          </li>
-        </ul>
-        <ul>
-          <li>
-            <strong>GaNダイオード採用による軽量化：</strong><br>
-            整流回路に 20 W 入力可能な <strong>GaN（窒化ガリウム）ダイオード</strong>を用いる場合、<strong>65 g 以上の機体重量においてバッテリー重量比（0.3倍）を下回り</strong>、電源の大幅な軽量化が達成できる。
-          </li>
-          <li>
-            <strong>28 GHz 送電の課題：</strong><br>
-            5.8 GHz に比べて送電ビーム半径が大幅に絞られるため、風などの外乱に抗する<strong>飛行精度の高い制御（PID制御など）システムが不可欠</strong>となる。
-          </li>
-        </ul>
+        <div class="two-col" style="align-items: start; margin-top: 12px;">
+          <div>
+            <div class="image-container" style="margin-top:0;">
+              <img src="../../images/slide_site24.png"
+                   alt="図 6-27 AR.Drone 2.0 の必要送電電力"
+                   style="max-width:100%; max-height:260px; border-radius:8px; box-shadow:0 4px 24px rgba(23,32,38,0.14);" />
+              <p class="image-caption">図 6-27：AR.Drone 2.0 の飛行高度と必要送電電力（28 / 5.8 GHz）</p>
+            </div>
+            <ul style="margin-top:10px;">
+              <li>28 GHz・500 W（TWT）：最大高度約 <strong>3.5 m</strong> まで飛行可能。</li>
+              <li>5.8 GHz・1 kW（マグネトロン想定）：高度 <strong>1.6 m</strong> までしか飛行できない。</li>
+            </ul>
+          </div>
+          <div>
+            <div class="image-container" style="margin-top:0;">
+              <img src="../../images/slide_site25.png"
+                   alt="図 6-28 4000 W 級 UAV の必要送電電力"
+                   style="max-width:100%; max-height:260px; border-radius:8px; box-shadow:0 4px 24px rgba(23,32,38,0.14);" />
+              <p class="image-caption">図 6-28：4000 W 級 UAV の飛行高度と必要送電電力（28 / 5.8 GHz）</p>
+            </div>
+            <ul style="margin-top:10px;">
+              <li>高度約 <strong>3 m まで</strong>は両周波数の差が小さい。</li>
+              <li><strong>10 m 以上</strong>では、28 GHz が 5.8 GHz の <strong>2 倍以下</strong>の送電電力で飛行可能。</li>
+            </ul>
+          </div>
         </div>
-        <p class="slide-note" style="margin-top:12px;">
-        結論として、「高精度な測位・制御システム」と「GaN ダイオードを用いたレクテナ」の開発推進により、高効率・大電力を要する実用的な UAV へのワイヤレス給電が実現可能と判断される。
+        <p class="slide-note" style="margin-top:14px;">
+          一方、28 GHz はビーム半径が 5.8 GHz より小さいため、<strong>飛行精度の高い制御が不可欠</strong>である。
+        </p>
+      </section>
+
+      <section class="slide"
+               data-title="6.9.1 高度50mでの成立性"
+               data-group="6.9 UAVへのワイヤレス給電の実現可能性">
+        <p class="eyebrow">6.9.1 5.8 GHz・28 GHz の解析効率比較</p>
+        <h2 class="title">高度 50 m での給電成立性（図 6-29）</h2>
+        <p style="font-size: 0.85rem; color: var(--muted); margin-bottom: 12px;">
+          高度 50 m・送電アンテナ直径 1 m における受電 DC 電力と、参考とした回転翼 UAV の消費電力を比較する。
+          UAV はビーム角 9° の円上を位置・姿勢ズレなくホバリングすると仮定（5.8 GHz 先行研究と同条件）。
+        </p>
+        <div class="two-col" style="align-items: start; margin-top: 12px;">
+          <div class="image-container" style="margin-top:0;">
+            <img src="../../images/slide_site26.png"
+                 alt="図 6-29 高度 50 m における受電 DC 電力と UAV の消費電力"
+                 style="max-width:100%; max-height:340px; border-radius:8px; box-shadow:0 4px 24px rgba(23,32,38,0.14);" />
+            <p class="image-caption">図 6-29：高度 50 m・送電アンテナ直径 1 m の各送電電力における受電 DC 電力と UAV の消費電力</p>
+          </div>
+          <div>
+            <div class="kp-grid" style="grid-template-columns: 1fr; margin-top: 0; gap: 12px;">
+              <div class="kp-card">
+                <div class="kp-num">1 MW</div>
+                <div class="kp-desc"><strong>5.8 GHz</strong>：1 MW 送電でも UAV の消費電力を賄えない（条件1を満たさない）。</div>
+              </div>
+              <div class="kp-card">
+                <div class="kp-num">200 <span class="kp-unit">kW</span></div>
+                <div class="kp-desc"><strong>28 GHz</strong>：200 kW 送電で消費電力以上の DC 電力を得られる（条件1を満たす）。</div>
+              </div>
+            </div>
+            <ul style="margin-top:14px;">
+              <li>28 GHz・<strong>1 MW</strong> 送電では、消費電力の約 <strong>10 倍</strong>の DC 電力が得られ、飛行維持しながらバッテリー充電も可能と考えられる。</li>
+              <li>以上より、<strong>条件1（1 MW 以下・高度 50 m）</strong>は 28 GHz MPT で成立し、5.8 GHz では成立しない。</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide"
+               data-title="6.9.2 バッテリー性能との比較"
+               data-group="6.9 UAVへのワイヤレス給電の実現可能性">
+        <p class="eyebrow">6.9.2 バッテリー性能との比較（2020年時点）</p>
+        <h2 class="title">レクテナとバッテリーの重量比較（図 6-30）</h2>
+        <p style="font-size: 0.85rem; color: var(--muted); margin-bottom: 12px;">
+          条件2の検証として、機体重量に占める電源（レクテナ／バッテリー）の割合を比較する。
+          底面積の 1/4 に本研究のレクテナを搭載すると仮定。入力電力が整流回路の最大入力を超える場合は、整流回路を並列接続する。
+        </p>
+        <div class="two-col" style="align-items: start; margin-top: 12px;">
+          <div class="image-container" style="margin-top:0;">
+            <img src="../../images/slide_site27.png"
+                 alt="図 6-30 機体重量に占める電源の割合"
+                 style="max-width:100%; max-height:360px; border-radius:8px; box-shadow:0 4px 24px rgba(23,32,38,0.14);" />
+            <p class="image-caption">図 6-30：機体重量に占める電源の割合（GaAs / GaN ダイオード vs バッテリー重量比）[20]</p>
+          </div>
+          <ul style="margin-top:0;">
+            <li>一般にバッテリー重量は機体重量の約 <strong>0.3 倍</strong>。1 kg 以下の回転翼 UAV では近く一致するが、機体重量の増加に伴いバッテリー比率は下がる傾向。</li>
+            <li>本研究のダイオード（シリコン系）では、<strong>90 g 以上</strong>の機体でバッテリーと同程度の重量となる。</li>
+            <li>整流回路に 20 W 入力可能な <strong>GaN ダイオード</strong>を用いる場合、<strong>65 g 以上</strong>で機体重量の 0.3 倍を下回り、参照 UAV より大幅に軽量化が可能。</li>
+            <li>実用上は電力統合・安定供給ユニットの重量も考慮すると、<strong>GaN ダイオードを用いたレクテナを採用すべき</strong>である。</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="slide"
+               data-title="6.9・本章のまとめ"
+               data-group="6.9 UAVへのワイヤレス給電の実現可能性">
+        <p class="eyebrow">6.9 / 本章まとめ</p>
+        <h2 class="title">実現可能性の結論と本章のまとめ</h2>
+        <ul>
+          <li>菅沼らの解析式に基づく比較では、<strong>常に 28 GHz が 5.8 GHz より優位</strong>。大型 UAV では高度 50 m でも η<sub>A,max</sub> ≈ <strong>10 %</strong>。</li>
+          <li>高度 50 m の動作電力を賄うのに必要な送電電力は、28 GHz なら <strong>200 kW</strong>。5.8 GHz では <strong>1 MW でも不可能</strong>。</li>
+          <li>GaN など高耐圧ダイオードの開発が進むと、レクテナ電源はバッテリーより軽量になりうる（条件2）。</li>
+          <li>今後の鍵：①<strong>高精度な測位・制御</strong>、②<strong>GaN ダイオードレクテナ</strong> → 高効率・大電力 MPT が実現可能。</li>
+        </ul>
+        <p style="margin-top:16px; font-size: 0.85rem; color: var(--muted);">
+          <strong>本章のレビュー：</strong>菅沼ら（0.8 m・η<sub>exp</sub> = 0.88 %・約 20 s 連続）／慶長・茂呂ら（16アレー＋PID・1.2 m・η = 0.135 %・約 49 s 連続）の飛行デモを踏まえ、28 GHz MPT の実用可能性を示した。
         </p>
       </section>
     </main>
