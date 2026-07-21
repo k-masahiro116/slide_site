@@ -377,6 +377,16 @@ pre code {
   opacity: 0.35;
 }
 
+.control-pdf {
+  width: auto;
+  min-width: 46px;
+  padding: 0 14px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
 .counter {
   min-width: 58px;
   color: var(--muted);
@@ -521,4 +531,62 @@ pre code {
   font-size: 0.85rem;
   color: var(--muted);
   text-align: center;
+}
+
+/* ── PDF / 印刷用 ── */
+@media print {
+  @page {
+    size: A4 landscape;
+    margin: 12mm;
+  }
+
+  body {
+    min-height: auto;
+    background: #fff !important;
+    color: #172026;
+  }
+
+  .back-link,
+  .toc,
+  .controls,
+  .progress {
+    display: none !important;
+  }
+
+  .deck {
+    display: block;
+    min-height: auto;
+    padding: 0;
+    place-items: unset;
+  }
+
+  .slide {
+    display: flex !important;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+    max-width: none;
+    min-height: 0;
+    margin: 0 0 8mm;
+    padding: 8mm;
+    border: 1px solid #d8d0c3;
+    border-radius: 0;
+    box-shadow: none;
+    break-after: page;
+    page-break-after: always;
+    animation: none;
+    overflow: visible;
+  }
+
+  .slide:last-child {
+    break-after: auto;
+    page-break-after: auto;
+    margin-bottom: 0;
+  }
+
+  .slide img {
+    max-height: 140mm !important;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
 }

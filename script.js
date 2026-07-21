@@ -129,5 +129,21 @@ previousButton.addEventListener("click", () => goToSlide(activeIndex - 1));
 nextButton.addEventListener("click", () => goToSlide(activeIndex + 1));
 document.addEventListener("keydown", handleKeydown);
 
+function setupPdfExport() {
+  const controls = document.querySelector(".controls");
+  if (!controls || controls.querySelector('[data-action="pdf"]')) return;
+
+  const button = document.createElement("button");
+  button.className = "control control-pdf";
+  button.type = "button";
+  button.dataset.action = "pdf";
+  button.setAttribute("aria-label", "PDFとして保存");
+  button.title = "印刷ダイアログから「PDFに保存」を選んでください";
+  button.textContent = "PDF";
+  button.addEventListener("click", () => window.print());
+  controls.append(button);
+}
+
 buildTableOfContents();
+setupPdfExport();
 render();
